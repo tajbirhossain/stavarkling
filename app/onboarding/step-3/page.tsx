@@ -10,9 +10,9 @@ const OnboardingStepThree = () => {
       eyebrow="THE PREMISE"
       message={
         <>
-          Can something unknown become valuable simply{' '}
+          Can something unknown become valuable{' '}
           <br className="block max-[639px]:hidden" />
-          because someone decides it is?
+          simply because someone decides it is?
         </>
       }
       continueHref="/onboarding/step-4"

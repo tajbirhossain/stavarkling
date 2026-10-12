@@ -107,19 +107,21 @@ export default function Home() {
           <div className="containerMain ml-auto flex flex-row items-center justify-between gap-y-0 max-[1023px]:flex-col max-[1023px]:gap-y-12">
             <div className="w-1/3 text-left max-[1023px]:w-full max-[1023px]:text-center">
               <h4 className="hero-reveal mb-4 text-lg font-bold text-brand max-[639px]:text-base">
-                EXCLUSIVE ACCESS ONLY
+                THE WORLD CAN SEE IT. YOU CAN OWN IT.
               </h4>
               <h1 className="hero-reveal relative mb-13 text-7xl leading-none font-semibold max-[767px]:text-6xl max-[639px]:mb-10 max-[639px]:text-[2.625rem] max-[639px]:leading-[1.1] before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[''] max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2">
-                A Universe.{" "}
+                Universe.{" "}
                 <span className="block text-brand italic">Decided.</span>
               </h1>
               <h2 className="hero-reveal fontCinzel mb-3 text-[32px] font-medium text-brand max-[639px]:text-[1.625rem]">
                 &euro; 1,000,000
               </h2>
               <p className="hero-reveal mb-5 text-[22px] font-semibold max-[639px]:text-lg">
-                This is not a public sale.{" "}
+                One unknown artist.{" "}
                 <br className="block max-[639px]:hidden" />
-                Access is limited.
+                One artwork.
+                <br className="block max-[639px]:hidden" />
+                One collector.
               </p>
               <div className="hero-reveal flex justify-start max-[1023px]:justify-center">
                 <Link
@@ -322,8 +324,8 @@ export default function Home() {
                   className="w-4 shrink-0"
                 />
               </div>
-              <div className="mb-4 max-w-40 max-[639px]:max-w-none">
-                <p className="relative mb-6 text-xl font-bold max-[639px]:text-lg before:absolute before:bottom-[-0.75rem] before:left-0 before:h-0.5 before:w-6 before:bg-brand before:content-['']">
+              <div className="mb-4 max-w-40 max-[767px]:mx-auto max-[767px]:max-w-none max-[767px]:text-center max-[639px]:max-w-none">
+                <p className="relative mb-6 text-xl font-bold max-[767px]:before:left-1/2 max-[767px]:before:-translate-x-1/2 max-[639px]:text-lg before:absolute before:bottom-[-0.75rem] before:left-0 before:h-0.5 before:w-6 before:bg-brand before:content-['']">
                   Access is limited.{" "}
                   <br className="block max-[639px]:hidden" />
                   Not every request will be accepted
@@ -357,7 +359,7 @@ export default function Home() {
               alt=""
               className="pointer-events-none absolute right-4 bottom-5 w-16 opacity-40 max-[639px]:w-12"
             />
-            <div>
+            <div className="max-[767px]:text-center">
               <div className="mb-5 flex items-center justify-between gap-x-3">
                 <img
                   src="/images/icons/lotus-icon-colored.png"
@@ -377,14 +379,14 @@ export default function Home() {
               <p className="mb-4 text-sm font-bold tracking-wide text-brand">
                 SELECTION, NOT SCALE
               </p>
-              <p className="relative mb-6 text-[28px] leading-snug font-semibold text-brand italic max-[639px]:text-[1.5rem] before:absolute before:bottom-[-0.75rem] before:left-0 before:h-0.5 before:w-10 before:bg-brand before:content-['']">
+              <p className="relative mb-6 text-[28px] leading-snug font-semibold text-brand italic max-[767px]:before:left-1/2 max-[767px]:before:-translate-x-1/2 max-[639px]:text-[1.5rem] before:absolute before:bottom-[-0.75rem] before:left-0 before:h-0.5 before:w-10 before:bg-brand before:content-['']">
                 One person will understand.
               </p>
-              <p className="max-w-[200px] font-semibold text-brand/80">
+              <p className="max-w-[200px] font-semibold text-brand/80 max-[767px]:mx-auto">
                 This is not designed for a crowd. It is designed for recognition.
               </p>
             </div>
-            <p className="relative z-10 text-sm font-bold tracking-wide text-brand/70">
+            <p className="relative z-10 text-sm font-bold tracking-wide text-brand/70 max-[767px]:text-center">
               INTENTIONAL · SELECTIVE
             </p>
           </div>
@@ -406,8 +408,8 @@ export default function Home() {
                 className="w-4 shrink-0"
               />
             </div>
-            <div className="flex items-center">
-              <div className="w-[52%] pr-4 max-[639px]:pr-3">
+            <div className="flex items-center max-[767px]:flex-col max-[767px]:gap-y-5">
+              <div className="w-[52%] pr-4 max-[767px]:w-full max-[767px]:pr-0 max-[767px]:text-center">
                 <p className="mb-6 text-lg font-semibold max-[639px]:text-base">
                   You may be invited to the final decision.
                 </p>
@@ -417,7 +419,7 @@ export default function Home() {
                   <span className="text-brand">One million</span>
                 </p>
               </div>
-              <div className="flex w-[48%] items-center justify-center">
+              <div className="flex w-[48%] items-center justify-center max-[767px]:w-full">
                 <img
                   src="/images/artwork.png"
                   alt=""

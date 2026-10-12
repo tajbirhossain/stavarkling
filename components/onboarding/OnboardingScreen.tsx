@@ -118,7 +118,7 @@ const OnboardingScreen = ({
         <img
           src={backgroundTextSrc}
           alt=""
-          className="h-auto w-full max-w-[1480px] object-contain select-none [@media(max-height:500px)]:max-h-[10vh]"
+          className="h-auto w-full max-w-[1050px] object-contain select-none [@media(max-height:500px)]:max-h-[10vh]"
         />
       </div>
 

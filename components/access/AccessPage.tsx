@@ -12,9 +12,10 @@ import { useGSAP } from '@gsap/react'
 
 type AccessPageProps = {
   stage: AccessStage
+  alreadyRequested?: boolean
 }
 
-const AccessPage = ({ stage }: AccessPageProps) => {
+const AccessPage = ({ stage, alreadyRequested = false }: AccessPageProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const content = STAGE_CONTENT[stage]
 
@@ -81,7 +82,10 @@ const AccessPage = ({ stage }: AccessPageProps) => {
 
       <div className="bg-[#f7f3f4]">
         <JourneyProgress stage={stage} />
-        <NextStepsCard content={content.nextSteps} />
+        <NextStepsCard
+          content={content.nextSteps}
+          alreadyRequested={alreadyRequested}
+        />
         <ConfidentialFooter />
       </div>
     </div>

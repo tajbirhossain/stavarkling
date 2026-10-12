@@ -12,6 +12,11 @@ export type JourneyStage = {
   description: string
 }
 
+export type NextStepBeat = {
+  label: string
+  text: string
+}
+
 export type StageContent = {
   label: string
   heading: {
@@ -25,9 +30,17 @@ export type StageContent = {
   invitation: string
   nextSteps: {
     title: string
-    paragraphs: string[]
-    cta?: string
+    process: NextStepBeat
+    next: NextStepBeat
+    final: NextStepBeat
+    cta: string
   }
+  // Original nextSteps shape (restore with original NextStepsCard):
+  // nextSteps: {
+  //   title: string
+  //   paragraphs: string[]
+  //   cta?: string
+  // }
 }
 
 export const EXPERIENCE_SECTION_TITLE = 'THE EXPERIENCE'
@@ -63,14 +76,31 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     body: ['Some experiences begin quietly. This is one of them.'],
     invitation: 'This is not an approval.\nIt is an invitation.',
     nextSteps: {
-      title: 'THE EXPERIENCE CONTINUES',
-      paragraphs: [
-        'Some moments deserve patience.',
-        'Some decisions deserve certainty.',
-        'This is one of them.',
-        'Every stage brings one step closer to a single decision.',
-      ],
+      title: 'WHAT HAPPENS NEXT',
+      process: {
+        label: 'WHERE YOU ARE',
+        text: 'You are at stage 1 of 3. Request the next stage when you are ready — we unlock each step selectively.',
+      },
+      next: {
+        label: 'NEXT',
+        text: 'Stage 2 — THE MOMENT. Space to sit with the work before any decision.',
+      },
+      final: {
+        label: 'FINAL',
+        text: 'Stage 3 — THE DECISION. Private acquisition of one artwork, for one collector.',
+      },
+      cta: 'REQUEST THE NEXT STAGE',
     },
+    // Original nextSteps:
+    // nextSteps: {
+    //   title: 'THE EXPERIENCE CONTINUES',
+    //   paragraphs: [
+    //     'Some moments deserve patience.',
+    //     'Some decisions deserve certainty.',
+    //     'This is one of them.',
+    //     'Every stage brings one step closer to a single decision.',
+    //   ],
+    // },
   },
   2: {
     label: 'STAGE',
@@ -81,14 +111,31 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     body: ['Before the world believes, someone always believes first.'],
     invitation: 'This moment belongs to one person.',
     nextSteps: {
-      title: 'THE EXPERIENCE CONTINUES',
-      paragraphs: [
-        'Some moments deserve patience.',
-        'Some decisions deserve certainty.',
-        'This is one of them.',
-        'Every stage brings one step closer to a single decision.',
-      ],
+      title: 'WHAT HAPPENS NEXT',
+      process: {
+        label: 'WHERE YOU ARE',
+        text: 'You are at stage 2 of 3. Request the final stage when you are ready — advancement remains selective.',
+      },
+      next: {
+        label: 'NEXT',
+        text: 'Stage 3 — THE DECISION. The last step before private acquisition.',
+      },
+      final: {
+        label: 'FINAL',
+        text: 'Acquisition of Stavarkle #1 — Universe. Decided. One buyer. One million.',
+      },
+      cta: 'REQUEST THE FINAL STAGE',
     },
+    // Original nextSteps:
+    // nextSteps: {
+    //   title: 'THE EXPERIENCE CONTINUES',
+    //   paragraphs: [
+    //     'Some moments deserve patience.',
+    //     'Some decisions deserve certainty.',
+    //     'This is one of them.',
+    //     'Every stage brings one step closer to a single decision.',
+    //   ],
+    // },
   },
   3: {
     label: 'STAGE',
@@ -100,15 +147,32 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     invitation:
       'Before value is recognised by many, it is recognised by one.',
     nextSteps: {
-      title: 'THE EXPERIENCE CONTINUES',
-      paragraphs: [
-        'Some moments deserve patience.',
-        'Some decisions deserve certainty.',
-        'This is one of them.',
-        'Every stage brings one step closer to a single decision.',
-      ],
+      title: 'THE FINAL STEP',
+      process: {
+        label: 'WHERE YOU ARE',
+        text: 'You are at stage 3 of 3 — THE DECISION. What remains is private acquisition.',
+      },
+      next: {
+        label: 'NEXT',
+        text: 'Begin acquisition when you are certain. This step is for one collector only.',
+      },
+      final: {
+        label: 'FINAL',
+        text: 'Stavarkle #1 — Universe. Decided. One artwork. One buyer. One million.',
+      },
       cta: 'BEGIN PRIVATE ACQUISITION',
     },
+    // Original nextSteps:
+    // nextSteps: {
+    //   title: 'THE EXPERIENCE CONTINUES',
+    //   paragraphs: [
+    //     'Some moments deserve patience.',
+    //     'Some decisions deserve certainty.',
+    //     'This is one of them.',
+    //     'Every stage brings one step closer to a single decision.',
+    //   ],
+    //   cta: 'BEGIN PRIVATE ACQUISITION',
+    // },
   },
 }
 

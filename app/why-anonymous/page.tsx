@@ -112,60 +112,42 @@ const WhyAnonymous = () => {
                                     <span className="fontCinzel font-medium">04 —</span> WHY ANONYMOUS?
                                 </h4>
 
-                                <h1 className="max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-13 max-[639px]:mb-10 text-[52px] max-[1500px]:text-[46px] max-[1350px]:text-[40px] max-[1200px]:text-[32px] max-[767px]:text-[2.625rem] max-[639px]:text-[2.25rem] leading-15 max-[1500px]:leading-[54px] max-[1350px]:leading-[48px] max-[1200px]:leading-[40px] max-[767px]:leading-[1.15] max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-['']">
+                                <h1 className="max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-10 max-[639px]:mb-8 text-[52px] max-[1500px]:text-[46px] max-[1350px]:text-[40px] max-[1200px]:text-[32px] max-[767px]:text-[2.625rem] max-[639px]:text-[2.25rem] leading-15 max-[1500px]:leading-[54px] max-[1350px]:leading-[48px] max-[1200px]:leading-[40px] max-[767px]:leading-[1.15] max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-['']">
                                     Why <span className="text-brand">Anonymous?</span>
                                 </h1>
 
-                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    The artist&apos;s identity is intentionally{' '}
+                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-8 max-[639px]:mb-6 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                                    {/* The artist&apos;s identity is intentionally{' '}
                                     <br className="block max-[639px]:hidden" />
-                                    secondary to the experiment.
-                                </p>
-
-                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    The experiment was never designed{' '}
-                                    <br className="block max-[639px]:hidden" />
-                                    around a name.
-                                    <br className="block max-[639px]:hidden" />
-                                    <br className="block max-[639px]:hidden" />
-                                    It was designed around a decision.
-                                </p>
-
-                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    The moment a name enters{' '}
-                                    <br className="block max-[639px]:hidden" />
-                                    the conversation,{' '}
-                                    <br className="block max-[639px]:hidden" />
+                                    secondary to the experiment. */}
+                                    The moment a name enters the conversation,
+                                    <br />
                                     perception changes.
                                 </p>
 
-                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    If the artist were the focus,{' '}
+                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-8 max-[639px]:mb-6 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                                    {/* The experiment was never designed around a name —{' '}
                                     <br className="block max-[639px]:hidden" />
-                                    the experiment would already{' '}
+                                    it was designed around a decision.{' '}
                                     <br className="block max-[639px]:hidden" />
-                                    be influenced.
-                                    <br className="block max-[639px]:hidden" />
-                                    <br className="block max-[639px]:hidden" />
-                                    This project removes that advantage.
-                                </p>
-
-                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-13 max-[639px]:mb-10 text-xl font-extrabold text-brand max-[639px]:text-lg before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    Not to hide.
+                                    The moment a name enters, perception changes. */}
+                                    Anonymity is part of the experiment.
                                     <br />
-                                    To observe.
+                                    The artist’s identity is intentionally secondary.
                                 </p>
 
-                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    The question is not who created it.{' '}
-                                    <br className="block max-[639px]:hidden" />
-                                    The question is what creates value.
+                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 anon-reveal relative mb-8 max-[639px]:mb-6 text-xl max-[639px]:text-lg before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                                    {/* Not to hide.
+                                    <br />
+                                    To observe. */}
+                                    You encounter the artwork without a reputation to guide your judgement.
                                 </p>
 
                                 <p className="anon-reveal text-3xl font-medium text-brand italic max-[639px]:text-2xl">
-                                    Can something unknown become valuable{' '}
+                                    {/* Can something unknown become valuable{' '}
                                     <br className="block max-[639px]:hidden" />
-                                    simply because someone decides it is?
+                                    simply because someone decides it is? */}
+                                    What you see in it is yours to decide.
                                 </p>
                             </div>
                         </div>

@@ -105,14 +105,14 @@ const Artwork = () => {
         <Header ind={0} />
 
         <section className="py-14 max-[1023px]:py-12 max-[639px]:py-8">
-          <div className="containerMain flex flex-row gap-y-0 max-[1023px]:flex-col max-[1023px]:gap-y-12">
-            <div className="flex w-1/2 flex-row gap-y-0 max-[1023px]:w-full max-[1023px]:flex-col max-[1023px]:gap-y-10">
-              <div className="w-1/2 border-[#cccccc] border-r pr-4 text-left max-[1023px]:w-full max-[1023px]:border-r-0 max-[1023px]:pr-0 max-[1023px]:text-center">
+          <div className="containerMain flex flex-row justify-between gap-y-0 max-[1023px]:flex-col max-[1023px]:gap-y-12">
+            <div className="flex w-[30%] max-[1023px]:w-full">
+              <div className="w-full border-[#cccccc] border-r pr-4 text-left max-[1023px]:border-r-0 max-[1023px]:pr-0 max-[1023px]:text-center">
                 <h4 className="art-reveal mb-4 text-lg font-bold text-brand max-[639px]:text-base">
                   <span className="fontCinzel font-medium">01 —</span> THE ARTWORK
                 </h4>
 
-                <h1 className="max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-[52px] max-[1500px]:text-[46px] max-[1350px]:text-[40px] max-[1200px]:text-[32px] max-[767px]:text-[2.625rem] max-[639px]:text-[2.25rem] leading-15 max-[1500px]:leading-[54px] max-[1350px]:leading-[48px] max-[1200px]:leading-[40px] max-[767px]:leading-[1.15] max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-['']">
+                <h1 className="max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-10 max-[639px]:mb-8 text-[52px] max-[1500px]:text-[46px] max-[1350px]:text-[40px] max-[1200px]:text-[32px] max-[767px]:text-[2.625rem] max-[639px]:text-[2.25rem] leading-15 max-[1500px]:leading-[54px] max-[1350px]:leading-[48px] max-[1200px]:leading-[40px] max-[767px]:leading-[1.15] max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-['']">
                   Stavarkle <span className="fontCinzel font-medium">#1</span>
                   <br />
                   <span className="block text-brand italic">
@@ -120,67 +120,46 @@ const Artwork = () => {
                   </span>
                 </h1>
 
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-3xl max-[639px]:text-2xl font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                {/* <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-8 max-[639px]:mb-6 text-3xl max-[639px]:text-2xl font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
                   One artwork.
                   <br />
                   One decision.
                   <br />
                   <span className="text-brand italic">One million.</span>
-                </p>
+                </p> */}
 
-                <h2 className="art-reveal fontCinzel mb-6 text-6xl font-medium text-brand max-[1449px]:text-5xl max-[1200px]:text-4xl max-[639px]:text-3xl">
+                <h2 className="art-reveal fontCinzel mb-4 text-6xl font-medium text-brand max-[1449px]:text-5xl max-[1200px]:text-4xl max-[639px]:text-3xl">
                   &euro; 1,000,000
                 </h2>
 
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-3xl max-[639px]:text-2xl font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                  Not as a price.
+                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-8 max-[639px]:mb-6 text-3xl max-[639px]:text-2xl font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                  {/* Not as a price.
                   <br />
-                  <span className="text-brand italic">As a position.</span>
+                  <span className="text-brand italic">As a position.</span> */}
+                  ONE ORIGINAL ARTWORK
                 </p>
 
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-xl font-semibold text-brand max-[639px]:text-lg leading-10 max-[639px]:leading-8 before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                  PRIVATE ACQUISITION
+                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-8 max-[639px]:mb-6 text-xl font-semiboldd max-[639px]:text-lg leading-10 max-[639px]:leading-8 before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                  Thousands of individual elements, placed entirely by hand.
                   <br />
-                  EXCLUSIVE RELEASE
-                  <br />
-                  SIGNED BY ARTIST
-                  <br />
-                  PHYSICAL ORIGINAL ARTWORK
+                  A study in precision, repetition, and perception.
                 </p>
-              </div>
 
-              <div className="w-1/2 px-8 text-left max-[1023px]:w-full max-[1023px]:px-6 max-[1023px]:text-center max-[639px]:px-0">
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                  Created to test perception, value, and belief.{' '}
+                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-8 max-[639px]:mb-6 text-xl font-semibold text-brand max-[639px]:text-lg leading-10 max-[639px]:leading-8 before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                  SIGNED BY THE ARTIST
+                  <br />
+                  ACCOMPANIED BY A CERTIFICATE OF AUTHENTICITY
+                </p>
+
+                {/* <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-8 max-[639px]:mb-6 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                  Created to test perception, value, and belief —{' '}
                   <br className="block max-[639px]:hidden" />
-                  This piece was never created for decoration.{' '}
+                  not decoration. A statement about value, time,{' '}
                   <br className="block max-[639px]:hidden" />
-                  It was created as a statement.
+                  attention, and emotional conviction.
                 </p>
 
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                  About value.
-                  <br />
-                  Time.
-                  <br />
-                  Attention.
-                  <br />
-                  And emotional conviction.
-                </p>
-
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                  Not because it makes sense.{' '}
-                  <br className="block max-[639px]:hidden" />
-                  Because it doesn&apos;t have to.
-                </p>
-
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                  Only the internet and{' '}
-                  <br className="block max-[639px]:hidden" />
-                  human conviction.
-                </p>
-
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-xl font-extrabold text-brand max-[639px]:text-lg before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-8 max-[639px]:mb-6 text-xl font-extrabold text-brand max-[639px]:text-lg before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
                   One artwork.
                   <br />
                   One collector.
@@ -188,19 +167,9 @@ const Artwork = () => {
                   One decision.
                 </p>
 
-                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 art-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                  And the courage to decide{' '}
-                  <br className="block max-[639px]:hidden" />
-                  before the rest of the world{' '}
-                  <br className="block max-[639px]:hidden" />
-                  understands.
-                </p>
-
                 <p className="art-reveal text-lg font-medium text-brand max-[639px]:text-base">
-                  If you&apos;re considering acquisition,{' '}
-                  <br className="block max-[639px]:hidden" />
-                  you already understand
-                </p>
+                  The courage to decide before the rest of the world understands.
+                </p> */}
               </div>
             </div>
 
@@ -216,16 +185,18 @@ const Artwork = () => {
               />
 
               <p className='art-meta fontCinzel relative mb-10 max-[639px]:mb-8 pt-13 max-[639px]:pt-10 text-center text-xl max-[639px]:text-base before:absolute before:bottom-[-1.25rem] before:left-1/2 before:h-0.5 before:w-10 before:-translate-x-1/2 before:bg-brand before:content-[""] after:absolute after:top-6 after:left-1/2 after:h-0.5 after:w-10 after:-translate-x-1/2 after:bg-brand after:content-[""]'>
-                104.4 x 75.2 x 1.5 cm
+                104.3 x 75.2 x 1.5 cm
                 <br />
-                41.06 x 29.61 x 0.59 in
+                41.1 x 29.6 x 0.6 in
+                <br />
+                <span className="capitalize">(Including frame)</span>
               </p>
 
-              <p className="art-meta text-center text-xl max-[639px]:text-base font-medium">
+              {/* <p className="art-meta text-center text-xl max-[639px]:text-base font-medium">
                 The artist&apos;s identity is intensionally{' '}
                 <br className="block max-[639px]:hidden" />
                 secondary to the experiment.
-              </p>
+              </p> */}
             </div>
           </div>
         </section>

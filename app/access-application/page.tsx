@@ -323,9 +323,14 @@ const AccessApplication = () => {
               </p>
 
               <p className="access-meta fontCinzel mb-6 text-center text-lg max-[639px]:text-base leading-7">
-                104.4 x 75.2 x 1.5 cm
+                {/* 104.4 x 75.2 x 1.5 cm
                 <br />
-                41.06 x 29.61 x 0.59 in
+                41.06 x 29.61 x 0.59 in */}
+                104.3 x 75.2 x 1.5 cm
+                <br />
+                41.1 x 29.6 x 0.6 in
+                <br />
+                <span className="capitalize">(Including frame)</span>
               </p>
 
               <div className="access-meta flex items-center justify-center gap-x-4">
@@ -341,7 +346,7 @@ const AccessApplication = () => {
           </div>
 
           <div className="access-meta mt-16 max-[639px]:mt-10 bg-[rgba(154,35,73,0.06)] py-8 max-[639px]:py-6">
-            <p className="px-5 text-lg font-medium text-brand max-[639px]:text-base italic">
+            <p className="px-5 text-lg font-medium text-brand text-center max-[639px]:text-base italic">
               This is not a traditional art sale.{' '}
               <br className="block max-[639px]:hidden" />
               It is a social experiment.

@@ -116,37 +116,57 @@ const Process = () => {
                                     The Process
                                 </h1>
 
-                                <p className="process-reveal mb-6 text-3xl font-semibold text-brand italic max-[639px]:text-2xl">
+                                {/* <p className="process-reveal mb-6 text-3xl font-semibold text-brand italic max-[639px]:text-2xl">
                                     An artistic experiment{' '}
                                     <br className="block max-[639px]:hidden" />
                                     Challenging the idea of value.
-                                </p>
+                                </p> */}
 
                                 <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 process-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    <span className="mb-3 block">
+                                    {/* <span className="mb-3 block">
                                         A radical vision redefining what society considers valuable
                                         in contemporary art.
                                     </span>
-                                    This is not a traditional art sale.
+                                    This is not a traditional art sale. */}
+                                    <span className="mb-3 block"><span className="fontCinzel font-medium">01</span> — PUBLIC EXPERIENCE</span>
+                                    The artwork is revealed.
+                                    <br />
+                                    The question of value is left open.
                                 </p>
 
                                 <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 process-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    No famous name.
+                                    {/* No famous name.
                                     <br />
                                     No gallery history.
                                     <br />
-                                    No institutional validation.
+                                    No institutional validation. */}
+                                    <span className="mb-3 block"><span className="fontCinzel font-medium">02</span> — PRIVATE ACCESS</span>
+                                    Move closer to the work.
+                                    <br />
+                                    Consider its place in your collection.
                                 </p>
 
                                 <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 process-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    Only the artwork.
+                                    {/* Only the artwork.
                                     <br />
                                     The idea.
                                     <br />
-                                    And the decision.
+                                    And the decision. */}
+                                    <span className="mb-3 block"><span className="fontCinzel font-medium">03</span> — SELECTION, NOT SCALE</span>
+                                    A personal conviction.
+                                    <br />
+                                    The choice to acquire what you see value in.
+                                </p>
+                                <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 process-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
+                                    <span className="mb-3 block"><span className="fontCinzel font-medium">04</span> — THE ACQUISITION</span>
+                                    The final stage is private.
+                                    <br />
+                                    The work enters your collection.
+                                    <br />
+                                    Your decision enters its story.
                                 </p>
 
-                                <p className="process-reveal text-xl font-extrabold text-brand max-[639px]:text-lg">
+                                {/* <p className="process-reveal text-xl font-extrabold text-brand max-[639px]:text-lg">
                                     One artwork.
                                     <br />
                                     One acquisition.
@@ -154,7 +174,7 @@ const Process = () => {
                                     One final decision.
                                     <br />
                                     One access.
-                                </p>
+                                </p> */}
                             </div>
                         </div>
 
@@ -169,17 +189,19 @@ const Process = () => {
                                 className="process-image mx-auto w-full max-w-none shadow-[0_40px_100px_rgba(0,0,0,0.18)] max-[1023px]:max-w-[420px] max-[1023px]:shadow-[0_24px_60px_rgba(0,0,0,0.16)]"
                             />
 
-                            <p className='pt-13 max-[639px]:pt-10 fontCinzel relative mb-10 max-[639px]:mb-8 text-center text-xl max-[639px]:text-base before:absolute before:bottom-[-1.25rem] before:left-1/2 before:h-0.5 before:w-10 before:-translate-x-1/2 before:bg-brand before:content-[""] after:absolute after:top-6 after:left-1/2 after:h-0.5 after:w-10 after:-translate-x-1/2 after:bg-brand after:content-[""]'>
-                                104.4 x 75.2 x 1.5 cm
+                            <p className='art-meta fontCinzel relative mb-10 max-[639px]:mb-8 pt-13 max-[639px]:pt-10 text-center text-xl max-[639px]:text-base before:absolute before:bottom-[-1.25rem] before:left-1/2 before:h-0.5 before:w-10 before:-translate-x-1/2 before:bg-brand before:content-[""] after:absolute after:top-6 after:left-1/2 after:h-0.5 after:w-10 after:-translate-x-1/2 after:bg-brand after:content-[""]'>
+                                104.3 x 75.2 x 1.5 cm
                                 <br />
-                                41.06 x 29.61 x 0.59 in
+                                41.1 x 29.6 x 0.6 in
+                                <br />
+                                <span className="capitalize">(Including frame)</span>
                             </p>
 
-                            <p className="process-meta text-center text-xl max-[639px]:text-base font-medium">
+                            {/* <p className="process-meta text-center text-xl max-[639px]:text-base font-medium">
                                 The artist&apos;s identity is intensionally{' '}
                                 <br className="block max-[639px]:hidden" />
                                 secondary to the experiment.
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </section>

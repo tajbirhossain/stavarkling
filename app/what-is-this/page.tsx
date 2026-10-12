@@ -82,7 +82,7 @@ const WhatIsThis = () => {
 
     return (
         <div ref={containerRef}>
-            <div className="bg-[url('/images/main-bg.png')] bg-no-repeat bg-center bg-cover">
+            <div className="bg-[url('/images/main-bg.png')] bg-no-repeat bg-center bg-cover min-h-screen">
                 <Header ind={-1} />
 
                 <section className="py-14 max-[1023px]:py-12 max-[639px]:py-8">
@@ -99,45 +99,38 @@ const WhatIsThis = () => {
 
                                 <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 what-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
                                     <span className="mb-3 block">
-                                        Stavarkling is an artistic social experiment exploring
-                                        perception, emotional value, rarity, and belief in the
-                                        digital age.
+                                        STAVARKLING is an artistic social experiment about how value is created.
+                                    </span>
+
+                                    <span className="mb-3 block">
+                                        One unknown artist.
+                                        <br />
+                                        One original artwork.
+                                        <br />
+                                        An asking price of €1,000,000.
                                     </span>
 
                                     <span className="mb-3 block text-brand italic">
                                         Can something unknown become valuable simply because
                                         someone decides it is?
                                     </span>
-
-                                    An unknown artist.
-                                    <br />
-                                    One artwork.
-                                    <br />
-                                    No gallery.
-                                    <br />
-                                    One final decision.
                                 </p>
 
                                 <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 what-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
                                     <span className="mb-3 block">
-                                        The question was never whether{' '}
-                                        <br className="block max-[639px]:hidden" />
-                                        the artwork is worth one million.
+                                        The artist has set the experiment in motion.
+                                        <br />
+                                        One collector can decide what happens next.
                                     </span>
 
-                                    The question is{' '}
-                                    <br className="block max-[639px]:hidden" />
-
-                                    <span className="text-3xl text-brand max-[639px]:text-2xl">
-                                        What creates value{' '}
-                                        <br className="block max-[639px]:hidden" />
-                                        in the first place?
+                                    <span className="text-xl text-brand max-[639px]:text-lg">
+                                        And own the artwork at the centre of it.
                                     </span>
                                 </p>
 
-                                <p className="what-reveal text-lg max-[639px]:text-base font-medium">
+                                {/* <p className="what-reveal text-lg max-[639px]:text-base font-medium">
                                     it exists for one collector.
-                                </p>
+                                </p> */}
                             </div>
                         </div>
 

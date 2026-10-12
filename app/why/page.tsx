@@ -123,15 +123,18 @@ const Why = () => {
                                 </p>
 
                                 <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 why-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    Every historic decision{' '}
+                                    {/* Every historic decision{' '}
                                     <br className="block max-[639px]:hidden" />
                                     sounds irrational{' '}
                                     <br className="block max-[639px]:hidden" />
-                                    in the beginning.
+                                    in the beginning. */}
+                                    Can an artwork be acquired for <span className="fontCinzel font-medium">&euro; 1,000,000</span>
+                                    <br />
+                                    before the world knows the artist’s name?
                                 </p>
 
                                 <p className='max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 why-reveal relative mb-13 max-[639px]:mb-10 text-lg max-[639px]:text-base font-medium before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-[""]'>
-                                    The purpose of this project{' '}
+                                    {/* The purpose of this project{' '}
                                     <br className="block max-[639px]:hidden" />
                                     is not to prove that the artwork{' '}
                                     <br className="block max-[639px]:hidden" />
@@ -142,15 +145,21 @@ const Why = () => {
                                     <br className="block max-[639px]:hidden" />
                                     what happens when someone{' '}
                                     <br className="block max-[639px]:hidden" />
-                                    decides it is.
+                                    decides it is. */}
+                                    That is the premise.
+                                    <br />
+                                    This is where you enter the experiment.
                                 </p>
 
                                 <p className="max-[1023px]:before:left-1/2 max-[1023px]:before:-translate-x-1/2 why-reveal relative mb-13 max-[639px]:mb-10 text-xl font-extrabold text-brand max-[639px]:text-lg before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:translate-x-0 before:bg-brand before:content-['']">
-                                    One artwork.
+                                    {/* One artwork.
                                     <br />
                                     One collector.
                                     <br />
-                                    One decision.
+                                    One decision. */}
+                                    Your acquisition becomes the answer.
+                                    <br />
+                                    The artwork becomes yours.
                                 </p>
                             </div>
                         </div>
@@ -167,7 +176,7 @@ const Why = () => {
                             />
 
                             <p className="why-meta mb-4 pt-13 max-[639px]:pt-10 text-center text-xl max-[639px]:text-lg font-medium">
-                                Acquisition Position
+                                ACQUISITION PRICE
                             </p>
 
                             <h2 className="why-meta fontCinzel mb-6 text-center text-6xl font-medium text-brand max-[1023px]:text-5xl max-[639px]:text-4xl">

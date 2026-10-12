@@ -10,7 +10,7 @@ const OnboardingStepOne = () => {
       eyebrow="BEFORE YOU PROCEED"
       message={
         <>
-          This project may permanently alter your{' '}
+          This experiment may permanently alter your{' '}
           <br className="block max-[639px]:hidden" />
           perception of value.
         </>

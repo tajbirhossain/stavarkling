@@ -16,16 +16,17 @@ const OnboardingStepFour = () => {
     <OnboardingScreen
       step={4}
       backgroundTextSrc="/images/onboarding-text-4.svg"
-      eyebrow="A DECISION IS REQUIRED"
+      eyebrow="THE DECISION IS YOURS"
       message={
         <>
-          Proceed only if you are willing to question what creates value.
-          <br className="block max-[639px]:hidden" />{' '}
-          My art – Universe.{' '}
-          <em className="text-brand">Decided.</em>
+          Enter the experiment.
+          <br className="block" />{' '}
+          {/* My art – Universe.{' '}
+          <em className="text-brand">Decided.</em> */}
+          You do not need the world to agree.
         </>
       }
-      ctaLabel="ENTER WEBSITE"
+      ctaLabel="STEP INSIDE"
       onContinue={handleEnterWebsite}
     />
   )

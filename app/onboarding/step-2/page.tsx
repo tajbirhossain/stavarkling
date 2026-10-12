@@ -7,8 +7,14 @@ const OnboardingStepTwo = () => {
     <OnboardingScreen
       step={2}
       backgroundTextSrc="/images/onboarding-text-2.svg"
-      eyebrow="AN EXPERIMENT"
-      message="Its outcome remains unknown."
+      eyebrow="AN EXPERIMENT IN VALUE"
+      message={
+        <>
+          The artwork is complete.{' '}
+          <br />
+          The outcome remains unknown.
+        </>
+      }
       continueHref="/onboarding/step-3"
     />
   )
