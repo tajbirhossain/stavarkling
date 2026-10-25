@@ -9,8 +9,8 @@ export function accessPathForStage(stage: AccessStage) {
 }
 
 /**
- * Allow stages up to the member's current DB stage.
- * Higher stages redirect back to the furthest unlocked path.
+ * Show the panel that matches the member's entered panel_stage.
+ * access_stage is the admin-granted ceiling (ENTER when ahead of panel).
  */
 export async function requireAccessStage(required: AccessStage) {
   const session = await getAccessSession()
@@ -20,28 +20,22 @@ export async function requireAccessStage(required: AccessStage) {
     redirect('/access')
   }
 
+  // Not granted this far yet — send them to the panel they've entered.
   if (session.accessStage < required) {
-    redirect(accessPathForStage(session.accessStage))
+    redirect(accessPathForStage(session.panelStage))
+  }
+
+  // Always land on the panel they've entered (survives home → ACCESS).
+  if (session.panelStage !== required) {
+    redirect(accessPathForStage(session.panelStage))
   }
 
   return session
 }
 
 /**
- * Always show the page that matches the member's live DB stage.
- * So admin stage changes (up or down) appear on the next visit / refresh,
- * instead of leaving someone on /access seeing stage 1 forever.
+ * @deprecated Prefer requireAccessStage — panel_stage is the source of truth for landing.
  */
 export async function requireCurrentAccessStage(pageStage: AccessStage) {
-  const session = await getAccessSession()
-
-  if (!session) {
-    redirect('/access')
-  }
-
-  if (session.accessStage !== pageStage) {
-    redirect(accessPathForStage(session.accessStage))
-  }
-
-  return session
+  return requireAccessStage(pageStage)
 }

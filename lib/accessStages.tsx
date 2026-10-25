@@ -16,6 +16,7 @@ export type JourneyStage = {
 
 export type NextStepBeat = {
   label: string
+  title?: string
   text: ReactNode
 }
 
@@ -32,17 +33,14 @@ export type StageContent = {
   invitation: string
   nextSteps: {
     title: string
-    process: NextStepBeat
-    next: NextStepBeat
-    final: NextStepBeat
+    beats: NextStepBeat[]
     cta: string
+    /** After the next stage is granted, while still on this panel */
+    advanceCta?: string
+    advanceHref?: string
+    /** Stage 3 — opens the process; does not confirm purchase */
+    ctaHref?: string
   }
-  // Original nextSteps shape (restore with original NextStepsCard):
-  // nextSteps: {
-  //   title: string
-  //   paragraphs: string[]
-  //   cta?: string
-  // }
 }
 
 export const EXPERIENCE_SECTION_TITLE = 'THE EXPERIENCE'
@@ -79,30 +77,45 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     invitation: 'This is not an approval.\nIt is an invitation.',
     nextSteps: {
       title: 'WHAT HAPPENS NEXT',
-      process: {
-        label: 'WHERE YOU ARE',
-        text: 'You are at stage 1 of 3. Request the next stage when you are ready — we unlock each step selectively.',
-      },
-      next: {
-        label: 'NEXT',
-        text: 'Stage 2 — THE MOMENT. Space to sit with the work before any decision.',
-      },
-      final: {
-        label: 'FINAL',
-        text: 'Stage 3 — THE DECISION. Private acquisition of one artwork, for one collector.',
-      },
+      beats: [
+        {
+          label: 'STAGE 01 OF 03',
+          title: 'THE BEGINNING',
+          text: (
+            <>
+              One unknown artist. One original artwork.
+              <br />
+              An experiment whose outcome remains open.
+            </>
+          ),
+        },
+        {
+          label: 'NEXT',
+          title: 'THE MOMENT',
+          text: (
+            <>
+              The world can see this artwork.
+              <br />
+              The next stage invites you to imagine it in your collection.
+            </>
+          ),
+        },
+        {
+          label: 'BEYOND THE MOMENT',
+          title: 'THE DECISION',
+          text: (
+            <>
+              One collector can give this experiment an answer.
+              <br />
+              And own the artwork at its centre.
+            </>
+          ),
+        },
+      ],
       cta: 'REQUEST THE NEXT STAGE',
+      advanceCta: 'ENTER THE MOMENT',
+      advanceHref: '/access/stage-2',
     },
-    // Original nextSteps:
-    // nextSteps: {
-    //   title: 'THE EXPERIENCE CONTINUES',
-    //   paragraphs: [
-    //     'Some moments deserve patience.',
-    //     'Some decisions deserve certainty.',
-    //     'This is one of them.',
-    //     'Every stage brings one step closer to a single decision.',
-    //   ],
-    // },
   },
   2: {
     label: 'STAGE',
@@ -114,30 +127,44 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     invitation: 'This moment belongs to one person.',
     nextSteps: {
       title: 'WHAT HAPPENS NEXT',
-      process: {
-        label: 'WHERE YOU ARE',
-        text: 'You are at stage 2 of 3. Request the final stage when you are ready — advancement remains selective.',
-      },
-      next: {
-        label: 'NEXT',
-        text: 'Stage 3 — THE DECISION. The last step before private acquisition.',
-      },
-      final: {
-        label: 'FINAL',
-        text: 'Acquisition of Stavarkle #1 — Universe. Decided. One buyer. One million.',
-      },
+      beats: [
+        {
+          label: 'STAGE 02 OF 03',
+          title: 'THE MOMENT',
+          text: (
+            <>
+              Imagine this artwork in your collection.
+              <br />
+              What would owning it mean to you?
+            </>
+          ),
+        },
+        {
+          label: 'NEXT',
+          title: 'THE DECISION',
+          text: (
+            <>
+              Your own judgement brings you to the next step.
+              <br />
+              Explore the private acquisition of Stavarkle #1.
+            </>
+          ),
+        },
+        {
+          label: 'THE POSSIBILITY',
+          text: (
+            <>
+              To own the artwork.
+              <br />
+              To become part of the experiment through the choice you make.
+            </>
+          ),
+        },
+      ],
       cta: 'REQUEST THE FINAL STAGE',
+      advanceCta: 'PROCEED TO THE DECISION',
+      advanceHref: '/access/stage-3',
     },
-    // Original nextSteps:
-    // nextSteps: {
-    //   title: 'THE EXPERIENCE CONTINUES',
-    //   paragraphs: [
-    //     'Some moments deserve patience.',
-    //     'Some decisions deserve certainty.',
-    //     'This is one of them.',
-    //     'Every stage brings one step closer to a single decision.',
-    //   ],
-    // },
   },
   3: {
     label: 'STAGE',
@@ -149,38 +176,53 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     invitation:
       'Before value is recognised by many, it is recognised by one.',
     nextSteps: {
-      title: 'THE FINAL STEP',
-      process: {
-        label: 'WHERE YOU ARE',
-        text: 'You are at stage 3 of 3 — THE DECISION. What remains is private acquisition.',
-      },
-      next: {
-        label: 'NEXT',
-        text: 'This invitation is yours alone. When you are certain, begin acquisition — no one else will be offered this step.',
-      },
-      final: {
-        label: 'FINAL',
-        text: (
-          <>
-            Stavarkle #1 —{' '}
-            <span className="text-brand">Universe. Decided.</span>
-            {' '}— awaits your decision alone.
-          </>
-        ),
-      },
+      title: 'THE DECISION',
+      beats: [
+        {
+          label: 'STAGE 03 OF 03',
+          title: 'YOUR DECISION',
+          text: (
+            <>
+              You have seen the artwork.
+              <br />
+              You know the premise.
+              <br />
+              The decision is yours.
+            </>
+          ),
+        },
+        {
+          label: 'THE ARTWORK',
+          text: (
+            <>
+              Stavarkle #1
+              <br />
+              <span className="text-brand">Universe. Decided.</span>
+            </>
+          ),
+        },
+        {
+          label: 'ACQUISITION PRICE',
+          text: (
+            <>
+              <span className="fontCinzel font-medium">&euro; 1,000,000</span>
+            </>
+          ),
+        },
+        {
+          label: 'YOUR PART IN THE EXPERIMENT',
+          text: (
+            <>
+              Your acquisition becomes the answer.
+              <br />
+              The artwork becomes yours.
+            </>
+          ),
+        },
+      ],
       cta: 'BEGIN PRIVATE ACQUISITION',
+      ctaHref: '/access/private-acquisition',
     },
-    // Original nextSteps:
-    // nextSteps: {
-    //   title: 'THE EXPERIENCE CONTINUES',
-    //   paragraphs: [
-    //     'Some moments deserve patience.',
-    //     'Some decisions deserve certainty.',
-    //     'This is one of them.',
-    //     'Every stage brings one step closer to a single decision.',
-    //   ],
-    //   cta: 'BEGIN PRIVATE ACQUISITION',
-    // },
   },
 }
 

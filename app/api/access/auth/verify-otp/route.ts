@@ -72,6 +72,7 @@ export async function POST(request: Request) {
     const response = NextResponse.json({
       ok: true,
       accessStage: result.applicant.accessStage,
+      panelStage: result.applicant.panelStage,
       message: 'Access granted.',
     })
 

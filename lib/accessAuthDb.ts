@@ -18,6 +18,7 @@ export type AccessApplicant = {
   emailNormalized: string
   fullName: string
   accessStage: AccessStage
+  panelStage: AccessStage
   status: string
 }
 
@@ -26,6 +27,7 @@ export type AccessSessionRecord = {
   emailNormalized: string
   applicationId: string
   accessStage: AccessStage
+  panelStage: AccessStage
   fullName: string
 }
 
@@ -35,6 +37,7 @@ type ApplicationRow = {
   email_normalized: string
   full_name: string
   access_stage: number
+  panel_stage: number
   status: string
 }
 
@@ -45,7 +48,7 @@ export async function findApplicantByEmail(
 
   return withClient(async (client) => {
     const result = await client.query<ApplicationRow>(
-      `SELECT id, email, email_normalized, full_name, access_stage, status
+      `SELECT id, email, email_normalized, full_name, access_stage, panel_stage, status
        FROM access_applications
        WHERE email_normalized = $1
        ORDER BY
@@ -69,6 +72,7 @@ export async function findApplicantByEmail(
       emailNormalized: row.email_normalized,
       fullName: row.full_name,
       accessStage: row.access_stage as AccessStage,
+      panelStage: row.panel_stage as AccessStage,
       status: row.status,
     }
   })
@@ -204,7 +208,7 @@ export async function verifyOtpChallenge(input: {
     )
 
     const appResult = await client.query<ApplicationRow>(
-      `SELECT id, email, email_normalized, full_name, access_stage, status
+      `SELECT id, email, email_normalized, full_name, access_stage, panel_stage, status
        FROM access_applications
        WHERE id = $1
        LIMIT 1`,
@@ -240,6 +244,7 @@ export async function verifyOtpChallenge(input: {
         emailNormalized: row.email_normalized,
         fullName: row.full_name,
         accessStage: row.access_stage as AccessStage,
+        panelStage: row.panel_stage as AccessStage,
         status: row.status,
       },
       sessionToken,
@@ -260,6 +265,7 @@ export async function getSessionByToken(
       email_normalized: string
       application_id: string
       access_stage: number
+      panel_stage: number
       full_name: string
       expires_at: Date
     }>(
@@ -269,6 +275,7 @@ export async function getSessionByToken(
          s.application_id,
          s.expires_at,
          a.access_stage,
+         a.panel_stage,
          a.full_name
        FROM access_sessions s
        INNER JOIN access_applications a ON a.id = s.application_id
@@ -295,6 +302,7 @@ export async function getSessionByToken(
       emailNormalized: row.email_normalized,
       applicationId: row.application_id,
       accessStage: row.access_stage as AccessStage,
+      panelStage: row.panel_stage as AccessStage,
       fullName: row.full_name,
     }
   })

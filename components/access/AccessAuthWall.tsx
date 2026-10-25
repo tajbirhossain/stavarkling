@@ -122,6 +122,7 @@ export default function AccessAuthWall() {
         error?: string
         errors?: { code?: string; form?: string }
         accessStage?: number
+        panelStage?: number
       }
 
       if (!response.ok) {
@@ -130,7 +131,8 @@ export default function AccessAuthWall() {
         return
       }
 
-      const stage = data.accessStage ?? 1
+      // Land on the panel they've entered, not merely the granted ceiling.
+      const stage = data.panelStage ?? data.accessStage ?? 1
       const path =
         stage === 3
           ? '/access/stage-3'

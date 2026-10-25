@@ -1,35 +1,125 @@
 'use client'
 
-import type { StageContent } from '@/lib/accessStages'
-import { useState, useTransition } from 'react'
+import {
+  isStoredAccessStage,
+  type AccessStage,
+  type StageContent,
+} from '@/lib/accessStages'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState, useTransition } from 'react'
 
 type NextStepsCardProps = {
   content: StageContent['nextSteps']
+  pageStage: AccessStage
+  memberStage: AccessStage
   alreadyRequested?: boolean
 }
 
-const beats = (content: StageContent['nextSteps']) =>
-  [content.process, content.next, content.final] as const
+const PENDING_TITLE = 'REQUEST RECEIVED'
+const PENDING_BODY =
+  'Your request for the next stage is awaiting personal review.'
 
-const ALREADY_MESSAGE =
-  'Your request has already been received. Patience is part of the process.'
+const CtaArrow = () => (
+  <img
+    src="/images/icons/arrow-right.png"
+    alt=""
+    className="w-5 brightness-[100]"
+  />
+)
 
-const SUCCESS_MESSAGE =
-  'Your request has been received. We will continue when the moment is right.'
+const ctaClassName =
+  'btnGradient inline-flex items-center justify-center gap-x-7 px-6 py-3 text-lg duration-300 hover:gap-x-9 max-[639px]:gap-x-5 max-[639px]:px-5 max-[639px]:text-base'
 
 const NextStepsCard = ({
   content,
+  pageStage,
+  memberStage,
   alreadyRequested = false,
 }: NextStepsCardProps) => {
+  const router = useRouter()
   const [requested, setRequested] = useState(alreadyRequested)
-  const [message, setMessage] = useState(
-    alreadyRequested ? ALREADY_MESSAGE : ''
-  )
+  const [liveMemberStage, setLiveMemberStage] = useState(memberStage)
   const [error, setError] = useState('')
+  const [isAdvancing, setIsAdvancing] = useState(false)
   const [isPending, startTransition] = useTransition()
 
+  useEffect(() => {
+    setLiveMemberStage(memberStage)
+  }, [memberStage])
+
+  useEffect(() => {
+    setRequested(alreadyRequested)
+  }, [alreadyRequested])
+
+  // While awaiting review, pick up admin stage grants without a full reload.
+  useEffect(() => {
+    if (!requested || liveMemberStage > pageStage || pageStage >= 3) return
+
+    let cancelled = false
+
+    const checkStage = async () => {
+      try {
+        const res = await fetch('/api/access/request-next-stage')
+        if (!res.ok || cancelled) return
+        const data = (await res.json()) as { accessStage?: unknown }
+        if (isStoredAccessStage(data.accessStage) && !cancelled) {
+          setLiveMemberStage(data.accessStage)
+        }
+      } catch {
+        // Ignore transient network errors while polling.
+      }
+    }
+
+    void checkStage()
+    const id = window.setInterval(checkStage, 4000)
+    return () => {
+      cancelled = true
+      window.clearInterval(id)
+    }
+  }, [requested, liveMemberStage, pageStage])
+
+  const canAdvance =
+    liveMemberStage > pageStage &&
+    Boolean(content.advanceCta) &&
+    Boolean(content.advanceHref)
+
+  const isAcquisition = Boolean(content.ctaHref)
+
+  const advancingLabel =
+    pageStage === 1 ? 'ENTERING…' : 'PROCEEDING…'
+
+  const handleAdvance = () => {
+    if (!content.advanceHref || isAdvancing) return
+    setError('')
+    setIsAdvancing(true)
+
+    void (async () => {
+      try {
+        const res = await fetch('/api/access/enter-next-panel', {
+          method: 'POST',
+        })
+        const data = (await res.json()) as {
+          path?: string
+          error?: string
+        }
+
+        if (!res.ok) {
+          setError(data.error || 'Unable to continue right now. Please try again.')
+          setIsAdvancing(false)
+          return
+        }
+
+        router.push(data.path || content.advanceHref!)
+      } catch {
+        setError('Unable to continue right now. Please try again.')
+        setIsAdvancing(false)
+      }
+    })()
+  }
+
   const handleRequest = () => {
-    if (requested || isPending) return
+    if (requested || isPending || canAdvance || isAcquisition) return
     setError('')
 
     startTransition(async () => {
@@ -39,13 +129,11 @@ const NextStepsCard = ({
         })
         const data = (await res.json()) as {
           alreadyRequested?: boolean
-          message?: string
           error?: string
         }
 
         if (res.status === 409 || data.alreadyRequested) {
           setRequested(true)
-          setMessage(data.message || ALREADY_MESSAGE)
           return
         }
 
@@ -58,7 +146,6 @@ const NextStepsCard = ({
         }
 
         setRequested(true)
-        setMessage(data.message || SUCCESS_MESSAGE)
       } catch {
         setError('Unable to submit your request right now. Please try again.')
       }
@@ -81,11 +168,16 @@ const NextStepsCard = ({
             </h2>
 
             <div className="space-y-7">
-              {beats(content).map((beat) => (
-                <div key={beat.label}>
+              {content.beats.map((beat) => (
+                <div key={`${beat.label}-${beat.title ?? ''}`}>
                   <p className="mb-2 text-sm font-bold tracking-[0.14em] text-brand">
                     {beat.label}
                   </p>
+                  {beat.title ? (
+                    <p className="mb-2 text-lg font-bold tracking-wide text-brand">
+                      {beat.title}
+                    </p>
+                  ) : null}
                   <p className="relative pb-5 text-lg font-medium leading-8 before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-8 before:bg-brand before:content-[''] max-[767px]:before:left-1/2 max-[767px]:before:-translate-x-1/2">
                     {beat.text}
                   </p>
@@ -94,25 +186,39 @@ const NextStepsCard = ({
             </div>
 
             <div className="mt-10 flex flex-col items-start gap-4 max-[767px]:items-center">
-              {requested ? (
-                <p className="max-w-xl text-lg font-medium leading-8 text-brand italic">
-                  {message}
-                </p>
+              {canAdvance ? (
+                <button
+                  type="button"
+                  onClick={handleAdvance}
+                  disabled={isAdvancing}
+                  className={`${ctaClassName} disabled:cursor-wait disabled:opacity-70`}
+                >
+                  {isAdvancing ? advancingLabel : content.advanceCta}
+                  {!isAdvancing && <CtaArrow />}
+                </button>
+              ) : isAcquisition ? (
+                <Link href={content.ctaHref!} className={ctaClassName}>
+                  {content.cta}
+                  <CtaArrow />
+                </Link>
+              ) : requested ? (
+                <div className="max-w-xl">
+                  <p className="text-lg font-bold tracking-wide text-brand">
+                    {PENDING_TITLE}
+                  </p>
+                  <p className="mt-2 text-lg font-medium leading-8 text-brand/90">
+                    {PENDING_BODY}
+                  </p>
+                </div>
               ) : (
                 <button
                   type="button"
                   onClick={handleRequest}
                   disabled={isPending}
-                  className="btnGradient inline-flex items-center justify-center gap-x-7 px-6 py-3 text-lg duration-300 hover:gap-x-9 disabled:cursor-wait disabled:opacity-70 max-[639px]:gap-x-5 max-[639px]:px-5 max-[639px]:text-base"
+                  className={`${ctaClassName} disabled:cursor-wait disabled:opacity-70`}
                 >
                   {isPending ? 'SUBMITTING…' : content.cta}
-                  {!isPending && (
-                    <img
-                      src="/images/icons/arrow-right.png"
-                      alt=""
-                      className="w-5 brightness-[100]"
-                    />
-                  )}
+                  {!isPending && <CtaArrow />}
                 </button>
               )}
 
@@ -126,57 +232,5 @@ const NextStepsCard = ({
     </section>
   )
 }
-
-/*
- * ---------------------------------------------------------------------------
- * ORIGINAL NextStepsCard (paragraph list + optional CTA)
- * Restore if client prefers the previous card. Also restore original
- * nextSteps shape in lib/accessStages.ts (see comment there).
- * ---------------------------------------------------------------------------
- *
- * const NextStepsCard = ({ content }: NextStepsCardProps) => {
- *   return (
- *     <section className="pb-20">
- *       <div className="containerMain">
- *         <div className="access-reveal max-w-4xl mx-auto rounded-[15px] bg-[rgba(154,35,73,0.04)] border border-[rgba(154,35,73,0.15)] px-14 py-12 max-[767px]:px-8 max-[767px]:py-10 flex flex-row items-start gap-12 max-[767px]:flex-col max-[767px]:items-center max-[767px]:gap-8">
- *           <img
- *             src="/images/icons/lotus-icon-colored.png"
- *             alt=""
- *             className="w-14 shrink-0"
- *           />
- *
- *           <div className="text-left max-[767px]:text-center">
- *             <h2 className="text-xl font-bold text-brand tracking-wide mb-5">
- *               {content.title}
- *             </h2>
- *
- *             <div className="space-y-2">
- *               {content.paragraphs.map((paragraph) => (
- *                 <p key={paragraph} className="text-lg font-medium leading-8">
- *                   {paragraph}
- *                 </p>
- *               ))}
- *             </div>
- *
- *             {content.cta && (
- *               <button
- *                 type="button"
- *                 className="btnGradient mt-8 py-3 px-5 text-lg inline-flex items-center justify-center gap-x-7 duration-300 hover:gap-x-9"
- *               >
- *                 {content.cta}
- *                 <img
- *                   src="/images/icons/arrow-right.png"
- *                   alt=""
- *                   className="w-5 brightness-[100]"
- *                 />
- *               </button>
- *             )}
- *           </div>
- *         </div>
- *       </div>
- *     </section>
- *   )
- * }
- */
 
 export default NextStepsCard

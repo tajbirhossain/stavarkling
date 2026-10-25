@@ -47,11 +47,16 @@ CREATE TABLE IF NOT EXISTS access_applications (
   status access_application_status NOT NULL DEFAULT 'pending',
 
   -- Access journey stage (THE BEGINNING / THE MOMENT / THE DECISION).
-  -- New applications start at stage 1.
+  -- New applications start at stage 1. Admin-granted ceiling.
   access_stage SMALLINT NOT NULL DEFAULT 1
     CONSTRAINT access_applications_access_stage_range
       CHECK (access_stage BETWEEN 1 AND 3),
   access_stage_updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+  -- Panel the member has entered (advances on ENTER / PROCEED). <= access_stage.
+  panel_stage SMALLINT NOT NULL DEFAULT 1
+    CONSTRAINT access_applications_panel_stage_range
+      CHECK (panel_stage BETWEEN 1 AND 3),
 
   -- Optional request metadata (filled by API later)
   client_ip INET,
@@ -70,10 +75,13 @@ COMMENT ON COLUMN access_applications.idempotency_key IS
   'UUID generated once per draft submission attempt; identical retries return the same row.';
 
 COMMENT ON COLUMN access_applications.access_stage IS
-  'Current access journey stage: 1=Beginning, 2=Moment, 3=Decision. New applications start at 1.';
+  'Admin-granted access ceiling: 1=Beginning, 2=Moment, 3=Decision. New applications start at 1.';
 
 COMMENT ON COLUMN access_applications.access_stage_updated_at IS
   'When access_stage last changed.';
+
+COMMENT ON COLUMN access_applications.panel_stage IS
+  'Access panel the member has entered (1–3). Advances when they click ENTER/PROCEED. Must stay <= access_stage.';
 
 -- One active application per email (blocks duplicate pending/in-review orders)
 CREATE UNIQUE INDEX IF NOT EXISTS access_applications_email_active_uidx
@@ -106,6 +114,7 @@ CREATE TRIGGER access_applications_set_updated_at
   EXECUTE FUNCTION set_access_applications_updated_at();
 
 -- Stamp access_stage_updated_at whenever the journey stage advances.
+-- Also clamp panel_stage if admin demotes access_stage.
 CREATE OR REPLACE FUNCTION touch_access_stage_updated_at()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -114,6 +123,9 @@ BEGIN
   IF TG_OP = 'UPDATE'
      AND NEW.access_stage IS DISTINCT FROM OLD.access_stage THEN
     NEW.access_stage_updated_at := now();
+    IF NEW.panel_stage > NEW.access_stage THEN
+      NEW.panel_stage := NEW.access_stage;
+    END IF;
   END IF;
   RETURN NEW;
 END;

@@ -29,6 +29,8 @@ export async function GET() {
     )
 
     return NextResponse.json({
+      accessStage: session.accessStage,
+      panelStage: session.panelStage,
       alreadyRequested: Boolean(request),
       requestedAt: request?.requestedAt?.toISOString() ?? null,
     })
@@ -41,10 +43,20 @@ export async function GET() {
   }
 }
 
+const PENDING_MESSAGE =
+  'Your request for the next stage is awaiting personal review.'
+
 export async function POST(request: Request) {
   const session = await getAccessSession()
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 })
+  }
+
+  if (session.accessStage >= 3) {
+    return NextResponse.json(
+      { error: 'There is no further stage to request.' },
+      { status: 400 }
+    )
   }
 
   try {
@@ -59,8 +71,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           alreadyRequested: true,
-          message:
-            'Your request has already been received. Patience is part of the process.',
+          message: PENDING_MESSAGE,
           requestedAt: result.request.requestedAt.toISOString(),
         },
         { status: 409 }
@@ -69,8 +80,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       alreadyRequested: true,
-      message:
-        'Your request has been received. We will continue when the moment is right.',
+      message: PENDING_MESSAGE,
       requestedAt: result.request.requestedAt.toISOString(),
     })
   } catch (err) {
