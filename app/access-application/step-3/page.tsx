@@ -106,13 +106,6 @@ const AccessApplicationStep3 = () => {
         '-=0.8'
       )
 
-      gsap.to('.access-image', {
-        y: '-=6',
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      })
     },
     { scope: containerRef, dependencies: [allowed] }
   )
@@ -139,13 +132,14 @@ const AccessApplicationStep3 = () => {
       <div className="bg-[url('/images/main-bg.png')] bg-no-repeat bg-center bg-cover">
         <Header ind={-1} />
 
-        <section className="py-14 pb-0 max-[1023px]:py-12 max-[639px]:py-8">
+        <section className="pt-14 pb-0 max-[1023px]:pt-12 max-[639px]:pt-8">
           <div className="containerMain flex flex-row justify-between gap-x-10 max-[1023px]:flex-col max-[1023px]:gap-y-12">
             <div className="w-[42%] access-reveal max-[1023px]:w-full">
               <div className="flex min-h-[640px] flex-col items-center justify-center rounded-[15px] border border-[rgba(154,35,73,0.2)] bg-[rgba(154,35,73,0.06)] px-10 py-14 text-center max-[1023px]:min-h-0 max-[1023px]:px-8 max-[1023px]:py-12 max-[639px]:px-5 max-[639px]:py-10">
                 <h4 className="mb-4 text-lg font-bold text-brand max-[639px]:text-base">
-                  STEP <span className="fontCinzel font-medium">3</span> OF{' '}
-                  <span className="fontCinzel font-medium">3</span>
+                  {/* STEP <span className="fontCinzel font-medium">3</span> OF{' '}
+                  <span className="fontCinzel font-medium">3</span> */}
+                  CONGRATULATIONS!
                 </h4>
 
                 <h1 className="relative mb-13 max-[639px]:mb-10 text-[42px] max-[1023px]:text-[2.625rem] max-[639px]:text-[2rem] leading-12 max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-1/2 before:h-0.5 before:w-10 before:-translate-x-1/2 before:bg-brand before:content-['']">
@@ -240,7 +234,7 @@ const AccessApplicationStep3 = () => {
           </div>
 
           <div className="access-meta mt-16 max-[639px]:mt-10 bg-[rgba(154,35,73,0.06)] py-8 max-[639px]:py-6">
-            <p className="mb-4 px-5 text-lg font-medium text-brand max-[639px]:text-base italic">
+            <p className="mb-4 px-5 text-lg font-medium text-brand text-center max-[639px]:text-base italic">
               The outcome remains unknown.
             </p>
             <span className="mx-auto block h-0.5 w-10 bg-brand" />

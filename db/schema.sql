@@ -33,17 +33,12 @@ CREATE TABLE IF NOT EXISTS access_applications (
     CONSTRAINT access_applications_country_len
       CHECK (char_length(btrim(country)) BETWEEN 2 AND 80),
 
-  -- Step 2 — required motivation
-  reason TEXT NOT NULL
+  -- Step 2 — optional personal note
+  reason TEXT
     CONSTRAINT access_applications_reason_len
-      CHECK (char_length(btrim(reason)) BETWEEN 10 AND 4000),
-
-  -- Step 1 — optional reflection (private prompts are not stored)
-  reflection TEXT
-    CONSTRAINT access_applications_reflection_len
       CHECK (
-        reflection IS NULL
-        OR char_length(btrim(reflection)) BETWEEN 1 AND 4000
+        reason IS NULL
+        OR char_length(btrim(reason)) BETWEEN 10 AND 4000
       ),
 
   -- Client-generated key so retries of the same submit do not create duplicates
@@ -70,9 +65,6 @@ CREATE TABLE IF NOT EXISTS access_applications (
 
 COMMENT ON TABLE access_applications IS
   'Private acquisition / request-access submissions from the 3-step application flow.';
-
-COMMENT ON COLUMN access_applications.reflection IS
-  'Optional free-text from step 1. Guided reflection prompts are not recorded.';
 
 COMMENT ON COLUMN access_applications.idempotency_key IS
   'UUID generated once per draft submission attempt; identical retries return the same row.';

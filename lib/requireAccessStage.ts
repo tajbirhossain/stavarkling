@@ -26,3 +26,22 @@ export async function requireAccessStage(required: AccessStage) {
 
   return session
 }
+
+/**
+ * Always show the page that matches the member's live DB stage.
+ * So admin stage changes (up or down) appear on the next visit / refresh,
+ * instead of leaving someone on /access seeing stage 1 forever.
+ */
+export async function requireCurrentAccessStage(pageStage: AccessStage) {
+  const session = await getAccessSession()
+
+  if (!session) {
+    redirect('/access')
+  }
+
+  if (session.accessStage !== pageStage) {
+    redirect(accessPathForStage(session.accessStage))
+  }
+
+  return session
+}

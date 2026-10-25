@@ -118,9 +118,9 @@ export default function Home() {
               </h2>
               <p className="hero-reveal mb-5 text-[22px] font-semibold max-[639px]:text-lg">
                 One unknown artist.{" "}
-                <br className="block max-[639px]:hidden" />
+                <br/>
                 One artwork.
-                <br className="block max-[639px]:hidden" />
+                <br/>
                 One collector.
               </p>
               <div className="hero-reveal flex justify-start max-[1023px]:justify-center">
@@ -222,7 +222,7 @@ export default function Home() {
             </h2>
             <p className="max-w-[300px] text-center text-lg font-semibold max-[639px]:text-base">
               You may be invited to the final decision.{" "}
-              <br className="block max-[639px]:hidden" />
+              <br />
               One artwork. One Buyer.{" "}
               <br className="block max-[639px]:hidden" />
               <span className="text-brand">One million.</span>
@@ -327,7 +327,7 @@ export default function Home() {
               <div className="mb-4 max-w-40 max-[767px]:mx-auto max-[767px]:max-w-none max-[767px]:text-center max-[639px]:max-w-none">
                 <p className="relative mb-6 text-xl font-bold max-[767px]:before:left-1/2 max-[767px]:before:-translate-x-1/2 max-[639px]:text-lg before:absolute before:bottom-[-0.75rem] before:left-0 before:h-0.5 before:w-6 before:bg-brand before:content-['']">
                   Access is limited.{" "}
-                  <br className="block max-[639px]:hidden" />
+                  <br />
                   Not every request will be accepted
                 </p>
                 <p className="font-semibold">

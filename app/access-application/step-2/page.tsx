@@ -20,11 +20,12 @@ import gsap from 'gsap'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 
+const ACCESS_CONTACT_EMAIL = 'private@stavarkling.com'
+
 const fieldClassName = (hasError: boolean) =>
-  `w-full rounded-[10px] bg-white/80 border px-6 py-4 text-lg font-medium italic text-[#2a2a2a] placeholder:text-[#b0a8ab] placeholder:italic outline-none transition-colors disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-3.5 max-[639px]:text-base ${
-    hasError
-      ? 'border-brand focus:border-brand'
-      : 'border-[rgba(154,35,73,0.35)] focus:border-brand/50'
+  `w-full rounded-[10px] bg-white/80 border px-6 py-4 text-lg font-medium italic text-[#2a2a2a] placeholder:text-[#b0a8ab] placeholder:italic outline-none transition-colors disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-3.5 max-[639px]:text-base ${hasError
+    ? 'border-brand focus:border-brand'
+    : 'border-[rgba(154,35,73,0.35)] focus:border-brand/50'
   }`
 
 const AccessApplicationStep2 = () => {
@@ -132,13 +133,6 @@ const AccessApplicationStep2 = () => {
       '-=0.8'
     )
 
-    gsap.to('.access-image', {
-      y: '-=6',
-      duration: 5,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-    })
   }, { scope: containerRef })
 
   const draftFields = { fullName, country, email, reason }
@@ -217,7 +211,7 @@ const AccessApplicationStep2 = () => {
       <div className="bg-[url('/images/main-bg.png')] bg-no-repeat bg-center bg-cover">
         <Header ind={-1} />
 
-        <section className="py-14 pb-0 max-[1023px]:py-12 max-[639px]:py-8">
+        <section className="pt-14 pb-0 max-[1023px]:pt-12 max-[639px]:pt-8">
           <div className="containerMain flex flex-row justify-between gap-x-10 max-[1023px]:flex-col max-[1023px]:gap-y-12">
             <div className="w-[42%] access-reveal max-[1023px]:w-full">
               <div className="relative rounded-[15px] border border-[rgba(154,35,73,0.2)] bg-[rgba(154,35,73,0.06)] px-10 py-10 max-[1023px]:px-8 max-[639px]:px-5 max-[639px]:py-8">
@@ -225,19 +219,23 @@ const AccessApplicationStep2 = () => {
 
                 <h4 className="mb-4 text-lg font-bold text-brand max-[639px]:text-base">
                   STEP <span className="fontCinzel font-medium">2</span> OF{' '}
-                  <span className="fontCinzel font-medium">3</span>
+                  <span className="fontCinzel font-medium">2</span>
                 </h4>
 
                 <h1 className="relative mb-13 max-[639px]:mb-10 text-[42px] max-[1023px]:text-[2.625rem] max-[639px]:text-[2rem] leading-12 max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:bg-brand before:content-['']">
-                  PRIVATE ACQUISITION{' '}
+                  {/* PRIVATE ACQUISITION{' '}
                   <br className="block max-[639px]:hidden" />
-                  REQUEST
+                  REQUEST */}
+                  CONTINUE IN PRIVATE
                 </h1>
 
                 <p className="mb-10 max-[639px]:mb-8 text-lg max-[639px]:text-base leading-8 max-[639px]:leading-7 font-medium">
-                  Please provide the following details.{' '}
+                  {/* Please provide the following details.{' '}
                   <br className="block max-[639px]:hidden" />
-                  Your request will be reviewed personally.
+                  Your request will be reviewed personally. */}
+                  Take the next step towards making this artwork yours.
+                  <br />
+                  Each access request is reviewed personally.
                 </p>
 
                 <form
@@ -246,7 +244,7 @@ const AccessApplicationStep2 = () => {
                   noValidate
                 >
                   <fieldset disabled={submitting} className="contents">
-                    <div>
+                    <div className='mb-3'>
                       <label
                         htmlFor="name"
                         className="mb-2 block text-lg font-bold text-brand max-[639px]:text-base tracking-wide"
@@ -295,7 +293,7 @@ const AccessApplicationStep2 = () => {
                       ) : null}
                     </div>
 
-                    <div>
+                    <div className='mb-3'>
                       <label
                         htmlFor="country"
                         className="mb-2 block text-lg font-bold text-brand max-[639px]:text-base tracking-wide"
@@ -322,11 +320,10 @@ const AccessApplicationStep2 = () => {
                               ? 'country-error'
                               : undefined
                           }
-                          className={`w-full appearance-none rounded-[10px] border bg-white/80 px-6 py-4 pr-12 text-lg font-medium italic outline-none transition-colors disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-3.5 max-[639px]:pr-10 max-[639px]:text-base ${
-                            touched.country && errors.country
+                          className={`w-full appearance-none rounded-[10px] border bg-white/80 px-6 py-4 pr-12 text-lg font-medium italic outline-none transition-colors disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-3.5 max-[639px]:pr-10 max-[639px]:text-base ${touched.country && errors.country
                               ? 'border-brand focus:border-brand'
                               : 'border-[rgba(154,35,73,0.35)] focus:border-brand/50'
-                          } ${country ? 'text-[#2a2a2a]' : 'text-[#b0a8ab]'}`}
+                            } ${country ? 'text-[#2a2a2a]' : 'text-[#b0a8ab]'}`}
                         >
                           <option value="" disabled>
                             Select your country
@@ -366,7 +363,7 @@ const AccessApplicationStep2 = () => {
                       ) : null}
                     </div>
 
-                    <div>
+                    <div className='mb-3'>
                       <label
                         htmlFor="email"
                         className="mb-2 block text-lg font-bold text-brand max-[639px]:text-base tracking-wide"
@@ -415,14 +412,12 @@ const AccessApplicationStep2 = () => {
                         htmlFor="reason"
                         className="mb-2 block text-lg font-bold text-brand max-[639px]:text-base tracking-wide"
                       >
-                        WHAT BROUGHT YOU THIS FAR?{' '}
-                        <span className="font-medium">*</span>
+                        A PERSONAL NOTE{' '}
+                        <span className="font-medium text-sm italic">(OPTIONAL)</span>
                       </label>
                       <textarea
                         id="reason"
                         name="reason"
-                        required
-                        minLength={ACCESS_APPLICATION_LIMITS.reason.min}
                         maxLength={ACCESS_APPLICATION_LIMITS.reason.max}
                         value={hydrated ? reason : ''}
                         onChange={(e) => {
@@ -443,28 +438,26 @@ const AccessApplicationStep2 = () => {
                             ? 'reason-error'
                             : 'reason-hint'
                         }
-                        className={`w-full resize-none rounded-[10px] border bg-white/80 px-6 py-5 text-lg font-medium text-[#2a2a2a] italic outline-none transition-colors placeholder:text-[#b0a8ab] placeholder:italic disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-4 max-[639px]:text-base ${
-                          touched.reason && errors.reason
+                        className={`w-full resize-none rounded-[10px] border bg-white/80 px-6 py-5 text-lg font-medium text-[#2a2a2a] italic outline-none transition-colors placeholder:text-[#b0a8ab] placeholder:italic disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-4 max-[639px]:text-base ${touched.reason && errors.reason
                             ? 'border-brand focus:border-brand'
                             : 'border-[rgba(154,35,73,0.35)] focus:border-brand/50'
-                        }`}
+                          }`}
                       />
-                      <div className="mt-2 flex items-start justify-between gap-x-4">
+                      <div className="mb-6 flex items-start justify-between gap-x-4">
                         <p
                           id={
                             touched.reason && errors.reason
                               ? 'reason-error'
                               : 'reason-hint'
                           }
-                          className={`text-base font-medium max-[639px]:text-sm ${
-                            touched.reason && errors.reason
+                          className={`text-base font-medium max-[639px]:text-sm ${touched.reason && errors.reason
                               ? 'text-brand'
                               : 'text-[#767676]'
-                          }`}
+                            }`}
                         >
                           {touched.reason && errors.reason
                             ? errors.reason
-                            : `Required. At least ${ACCESS_APPLICATION_LIMITS.reason.min} characters.`}
+                            : 'Optional. You may leave this blank.'}
                         </p>
                         <p className="shrink-0 text-base font-medium text-[#767676] max-[639px]:text-sm">
                           {reason.trim().length}/
@@ -487,13 +480,13 @@ const AccessApplicationStep2 = () => {
                     type="submit"
                     disabled={!canSubmit || submitting}
                     aria-busy={submitting}
-                    className={`btnGradient mb-0 inline-flex w-full items-center justify-center gap-x-4 py-4 text-lg duration-300 max-[639px]:py-3.5 max-[639px]:text-base ${
-                      !canSubmit || submitting
+                    className={`btnGradient mb-0 inline-flex w-full items-center justify-center gap-x-4 py-4 text-lg duration-300 max-[639px]:py-3.5 max-[639px]:text-base ${!canSubmit || submitting
                         ? 'cursor-not-allowed opacity-50'
                         : 'hover:gap-x-6'
-                    }`}
+                      }`}
                   >
-                    {submitting ? 'RECEIVING…' : 'SUBMIT REQUEST'}
+                    {/* {submitting ? 'RECEIVING…' : 'SUBMIT REQUEST'} */}
+                    {submitting ? 'RECEIVING…' : 'REQUEST PRIVATE ACCESS'}
                     {!submitting ? (
                       <img
                         src="/images/icons/arrow-right.png"
@@ -502,6 +495,17 @@ const AccessApplicationStep2 = () => {
                       />
                     ) : null}
                   </button>
+
+                  <p className="mt-6 text-center text-base leading-7 font-medium text-[#767676] italic max-[639px]:text-sm">
+                    For a private enquiry
+                    <br />
+                    <a
+                      href={`mailto:${ACCESS_CONTACT_EMAIL}`}
+                      className="text-brand not-italic underline decoration-brand/30 underline-offset-[5px] transition-colors hover:decoration-brand"
+                    >
+                      {ACCESS_CONTACT_EMAIL}
+                    </a>
+                  </p>
                 </form>
 
                 <div className="flex items-center justify-center gap-x-4">

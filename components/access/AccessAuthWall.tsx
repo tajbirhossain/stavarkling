@@ -3,7 +3,6 @@
 import Header from '@/components/Header'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 
 type Step = 'email' | 'otp'
@@ -12,7 +11,6 @@ const fieldClass =
   'w-full rounded-[10px] bg-white/80 border border-[rgba(154,35,73,0.35)] px-6 py-4 text-lg font-medium italic text-[#2a2a2a] placeholder:text-[#b0a8ab] placeholder:italic outline-none focus:border-brand/50 transition-colors disabled:opacity-60'
 
 export default function AccessAuthWall() {
-  const router = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
   const [step, setStep] = useState<Step>('email')
   const [email, setEmail] = useState('')
@@ -140,8 +138,9 @@ export default function AccessAuthWall() {
             ? '/access/stage-2'
             : '/access'
 
-      router.replace(path)
-      router.refresh()
+      // Hard navigation so the server re-reads the live DB stage.
+      window.location.assign(path)
+      return
     } catch {
       setError('A quiet interruption occurred. Please try again.')
       setBusy(false)

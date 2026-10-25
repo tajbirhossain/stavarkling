@@ -49,11 +49,10 @@ export async function POST(request: Request) {
   try {
     const result = await createAccessApplication({
       payload: {
-        reflection: draft.reflection.trim() || null,
         fullName: draft.fullName,
         country: draft.country,
         email: draft.email,
-        reason: draft.reason,
+        reason: draft.reason.trim() || null,
         idempotencyKey: draft.idempotencyKey,
       },
       clientIp: getClientIp(request),

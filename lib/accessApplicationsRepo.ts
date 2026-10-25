@@ -61,11 +61,11 @@ export async function createAccessApplication(input: {
   | { ok: false; status: 400 | 409; errors: AccessApplicationFieldErrors }
 > {
   const draftLike = {
-    reflection: input.payload.reflection ?? '',
+    reflection: '',
     fullName: input.payload.fullName,
     country: input.payload.country,
     email: input.payload.email,
-    reason: input.payload.reason,
+    reason: input.payload.reason ?? '',
     idempotencyKey: input.payload.idempotencyKey,
   }
 
@@ -88,18 +88,16 @@ export async function createAccessApplication(input: {
              email,
              country,
              reason,
-             reflection,
              idempotency_key,
              client_ip,
              user_agent
-           ) VALUES ($1, $2, $3, $4, $5, $6, $7::inet, $8)
+           ) VALUES ($1, $2, $3, $4, $5, $6::inet, $7)
            RETURNING id, status, created_at`,
           [
             payload.fullName,
             payload.email,
             payload.country,
             payload.reason,
-            payload.reflection,
             payload.idempotencyKey,
             input.clientIp,
             input.userAgent,
@@ -160,18 +158,17 @@ export function parseAccessApplicationBody(
     typeof value.fullName !== 'string' ||
     typeof value.country !== 'string' ||
     typeof value.email !== 'string' ||
-    typeof value.reason !== 'string' ||
     typeof value.idempotencyKey !== 'string'
   ) {
     return null
   }
 
   return {
-    reflection: typeof value.reflection === 'string' ? value.reflection : '',
+    reflection: '',
     fullName: value.fullName,
     country: value.country,
     email: value.email,
-    reason: value.reason,
+    reason: typeof value.reason === 'string' ? value.reason : '',
     idempotencyKey: value.idempotencyKey,
   }
 }

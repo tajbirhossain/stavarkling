@@ -26,7 +26,6 @@ export async function submitAccessApplication(
       'Idempotency-Key': draft.idempotencyKey,
     },
     body: JSON.stringify({
-      reflection: draft.reflection,
       fullName: draft.fullName,
       country: draft.country,
       email: draft.email,

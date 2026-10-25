@@ -164,9 +164,9 @@ export function validateEmail(email: string): string | null {
 
 export function validateReason(reason: string): string | null {
   const value = trim(reason)
-  if (!value) return 'Please share what brought you this far.'
+  if (!value) return null
   if (value.length < ACCESS_APPLICATION_LIMITS.reason.min) {
-    return `Please write at least ${ACCESS_APPLICATION_LIMITS.reason.min} characters.`
+    return `Please write at least ${ACCESS_APPLICATION_LIMITS.reason.min} characters, or leave this blank.`
   }
   if (value.length > ACCESS_APPLICATION_LIMITS.reason.max) {
     return `Response must be ${ACCESS_APPLICATION_LIMITS.reason.max} characters or fewer.`
@@ -240,11 +240,10 @@ export function validateAccessApplicationSubmission(draft: {
 }
 
 export type AccessApplicationSubmitPayload = {
-  reflection: string | null
   fullName: string
   country: string
   email: string
-  reason: string
+  reason: string | null
   idempotencyKey: string
 }
 
@@ -253,11 +252,10 @@ export function toAccessApplicationSubmitPayload(
 ): AccessApplicationSubmitPayload {
   const normalized = normalizeAccessApplicationDraft(draft)
   return {
-    reflection: normalized.reflection || null,
     fullName: normalized.fullName,
     country: normalized.country,
     email: normalized.email,
-    reason: normalized.reason,
+    reason: normalized.reason || null,
     idempotencyKey: normalized.idempotencyKey,
   }
 }

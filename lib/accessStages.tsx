@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 export type AccessStage = 1 | 2 | 3
 
 /** Stored in DB — applications start at stage 1 */
@@ -14,7 +16,7 @@ export type JourneyStage = {
 
 export type NextStepBeat = {
   label: string
-  text: string
+  text: ReactNode
 }
 
 export type StageContent = {
@@ -154,11 +156,17 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
       },
       next: {
         label: 'NEXT',
-        text: 'Begin acquisition when you are certain. This step is for one collector only.',
+        text: 'This invitation is yours alone. When you are certain, begin acquisition — no one else will be offered this step.',
       },
       final: {
         label: 'FINAL',
-        text: 'Stavarkle #1 — Universe. Decided. One artwork. One buyer. One million.',
+        text: (
+          <>
+            Stavarkle #1 —{' '}
+            <span className="text-brand">Universe. Decided.</span>
+            {' '}— awaits your decision alone.
+          </>
+        ),
       },
       cta: 'BEGIN PRIVATE ACQUISITION',
     },

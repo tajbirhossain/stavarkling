@@ -71,13 +71,6 @@ const WhatIsThis = () => {
             '-=1'
         )
 
-        gsap.to('.what-image', {
-            y: '-=6',
-            duration: 5,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-        })
     }, { scope: containerRef })
 
     return (

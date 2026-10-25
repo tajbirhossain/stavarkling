@@ -1,39 +1,36 @@
 'use client'
 
 import Header from '@/components/Header'
-import {
-  ACCESS_APPLICATION_LIMITS,
-  validateAccessApplicationStep1,
-  type AccessApplicationFieldErrors,
-} from '@/lib/accessApplication'
-import {
-  readAccessApplicationDraft,
-  writeAccessApplicationDraft,
-} from '@/lib/accessApplicationDraft'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 const questions = [
-  'What creates value?',
-  'What would ownership mean to you?',
-  'Can something unknown become valuable simply because someone decides it is?',
+  'What gives an artwork value in your eyes?',
+  'The artwork remains unchanged. <br /> What changes when it belongs to you?',
+  'What if your acquisition became the answer to this experiment?',
 ]
+
+function QuestionText({ text }: { text: string }) {
+  const parts = text.split(/<br\s*\/?>/i)
+
+  return (
+    <>
+      {parts.map((part, index) => (
+        <React.Fragment key={index}>
+          {index > 0 ? <br /> : null}
+          {part}
+        </React.Fragment>
+      ))}
+    </>
+  )
+}
 
 const AccessApplication = () => {
   const router = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
-  const [reflection, setReflection] = useState('')
-  const [errors, setErrors] = useState<AccessApplicationFieldErrors>({})
   const [openQuestion, setOpenQuestion] = useState<number | null>(null)
-  const [hydrated, setHydrated] = useState(false)
-
-  useEffect(() => {
-    const draft = readAccessApplicationDraft()
-    setReflection(draft.reflection)
-    setHydrated(true)
-  }, [])
 
   useGSAP(() => {
     gsap.set('.access-reveal', {
@@ -117,24 +114,9 @@ const AccessApplication = () => {
       '-=0.8'
     )
 
-    gsap.to('.access-image', {
-      y: '-=6',
-      duration: 5,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-    })
   }, { scope: containerRef })
 
-  const reflectionLength = reflection.trim().length
-  const reflectionError = errors.reflection
-
   function handleContinue() {
-    const nextErrors = validateAccessApplicationStep1({ reflection })
-    setErrors(nextErrors)
-    if (Object.keys(nextErrors).length > 0) return
-
-    writeAccessApplicationDraft({ reflection: reflection.trim() })
     router.push('/access-application/step-2')
   }
 
@@ -143,39 +125,42 @@ const AccessApplication = () => {
       <div className="bg-[url('/images/main-bg.png')] bg-no-repeat bg-center bg-cover">
         <Header ind={-1} />
 
-        <section className="py-14 pb-0 max-[1023px]:py-12 max-[639px]:py-8">
+        <section className="pt-14 pb-0 max-[1023px]:pt-12 max-[639px]:pt-8">
           <div className="containerMain flex flex-row justify-between gap-x-10 max-[1023px]:flex-col max-[1023px]:gap-y-12">
             {/* Left — application */}
             <div className="w-[42%] access-reveal max-[1023px]:w-full">
               <div className="rounded-[15px] border border-[rgba(154,35,73,0.2)] bg-[rgba(154,35,73,0.06)] px-10 py-10 max-[1023px]:px-8 max-[639px]:px-5 max-[639px]:py-8">
                 <h4 className="mb-4 text-lg font-bold text-brand max-[639px]:text-base">
                   STEP <span className="fontCinzel font-medium">1</span> OF{' '}
-                  <span className="fontCinzel font-medium">3</span>
+                  <span className="fontCinzel font-medium">2</span>
                 </h4>
 
                 <h1 className="relative mb-13 max-[639px]:mb-10 text-[42px] max-[1023px]:text-[2.625rem] max-[639px]:text-[2rem] leading-12 max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-0 before:h-0.5 before:w-10 before:bg-brand before:content-['']">
-                  ACCESS APPLICATION
+                  REQUEST PRIVATE ACCESS
                 </h1>
 
                 <p className="mb-10 max-[639px]:mb-8 text-lg max-[639px]:text-base leading-8 max-[639px]:leading-7 font-medium">
-                  Access to further stages is reviewed personally.{' '}
+                  {/* Access to further stages is reviewed personally.{' '}
                   <br className="block max-[639px]:hidden" />
                   Not every application proceeds.{' '}
                   <br className="block max-[639px]:hidden" />
                   <span className="text-brand italic">
                     The outcome remains unknown.
-                  </span>
+                  </span> */}
+                  Until now, you have seen the work.{' '}
+                  <br />
+                  <span className="text-brand italic">Now imagine it in your collection.</span>
                 </p>
 
                 <div className="mb-10 max-[639px]:mb-8">
                   <h2 className="mb-2 text-lg font-bold text-brand max-[639px]:text-base tracking-wide">
                     PRIVATE REFLECTION
                   </h2>
-                  <p className="mb-6 max-[639px]:mb-5 text-lg max-[639px]:text-base leading-7 font-medium">
+                  {/* <p className="mb-6 max-[639px]:mb-5 text-lg max-[639px]:text-base leading-7 font-medium">
                     Take a moment to reflect on the questions below.{' '}
                     <br className="block max-[639px]:hidden" />
                     There are no right or wrong answers.
-                  </p>
+                  </p> */}
 
                   <div className="border-t border-[rgba(154,35,73,0.2)]">
                     {questions.map((question, index) => {
@@ -198,7 +183,7 @@ const AccessApplication = () => {
                                 {String(index + 1).padStart(2, '0')}
                               </span>
                               <span className="text-xl leading-8 font-semibold max-[639px]:text-base max-[639px]:leading-7">
-                                {question}
+                                <QuestionText text={question} />
                               </span>
                             </span>
                             {/* <img
@@ -214,9 +199,8 @@ const AccessApplication = () => {
                           </button>
 
                           <div
-                            className={`overflow-hidden transition-all duration-300 ${
-                              isOpen ? 'max-h-24 pb-5' : 'max-h-0'
-                            }`}
+                            className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-24 pb-5' : 'max-h-0'
+                              }`}
                           >
                             <p className="pl-12 max-[639px]:pl-0 text-lg font-medium text-brand/70 italic max-[639px]:text-base">
                               Reflect privately. Nothing here is recorded.
@@ -228,7 +212,7 @@ const AccessApplication = () => {
                   </div>
                 </div>
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
                   <h2 className="mb-2 text-lg font-bold text-brand max-[639px]:text-base tracking-wide">
                     OPTIONAL REFLECTION
                   </h2>
@@ -260,18 +244,16 @@ const AccessApplication = () => {
                     aria-describedby={
                       reflectionError ? 'reflection-error' : 'reflection-hint'
                     }
-                    className={`w-full resize-none rounded-[10px] border bg-white/80 px-6 py-5 text-lg font-medium text-[#2a2a2a] italic outline-none transition-colors placeholder:text-[#b0a8ab] placeholder:italic max-[639px]:px-4 max-[639px]:py-4 max-[639px]:text-base ${
-                      reflectionError
-                        ? 'border-brand focus:border-brand'
-                        : 'border-[rgba(154,35,73,0.35)] focus:border-brand/50'
-                    }`}
+                    className={`w-full resize-none rounded-[10px] border bg-white/80 px-6 py-5 text-lg font-medium text-[#2a2a2a] italic outline-none transition-colors placeholder:text-[#b0a8ab] placeholder:italic max-[639px]:px-4 max-[639px]:py-4 max-[639px]:text-base ${reflectionError
+                      ? 'border-brand focus:border-brand'
+                      : 'border-[rgba(154,35,73,0.35)] focus:border-brand/50'
+                      }`}
                   />
                   <div className="mt-2 flex items-start justify-between gap-x-4">
                     <p
                       id={reflectionError ? 'reflection-error' : 'reflection-hint'}
-                      className={`text-base font-medium max-[639px]:text-sm ${
-                        reflectionError ? 'text-brand' : 'text-[#767676]'
-                      }`}
+                      className={`text-base font-medium max-[639px]:text-sm ${reflectionError ? 'text-brand' : 'text-[#767676]'
+                        }`}
                     >
                       {reflectionError ?? 'Optional. You may leave this blank.'}
                     </p>
@@ -279,7 +261,7 @@ const AccessApplication = () => {
                       {reflectionLength}/{ACCESS_APPLICATION_LIMITS.reflection.max}
                     </p>
                   </div>
-                </div>
+                </div> */}
 
                 <button
                   type="button"
