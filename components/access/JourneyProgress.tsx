@@ -77,7 +77,7 @@ const StageCopy = ({
     </h3>
 
     <p
-      className={`text-lg font-medium leading-7 max-w-[280px] mt-4 ${
+      className={`text-lg font-medium leading-7 max-w-[340px] mt-4 whitespace-pre-line ${
         isReached ? 'text-[#2a2a2a]' : 'text-[#6a6362]'
       }`}
     >
@@ -151,7 +151,7 @@ const JourneyProgress = ({ stage }: JourneyProgressProps) => {
                       isLast ? 'pb-0' : 'pb-10'
                     }`}
                   >
-                    <div className="mx-auto flex max-w-[280px] flex-col items-center">
+                    <div className="mx-auto flex max-w-[340px] flex-col items-center">
                       <StageCopy
                         item={item}
                         isReached={isReached}

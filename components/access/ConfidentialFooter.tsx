@@ -1,6 +1,6 @@
-const ConfidentialFooter = () => {
+const ConfidentialFooter = ({ className = 'pb-16 pt-4' }: { className?: string }) => {
   return (
-    <footer className="pb-16 pt-4">
+    <footer className={className}>
       <div className="containerMain flex flex-col items-center">
         <div className="access-reveal flex flex-col items-center">
           <img

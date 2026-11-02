@@ -560,7 +560,9 @@ const AccessApplicationStep2 = () => {
 
           <div className="access-meta mt-16 max-[639px]:mt-10 bg-[rgba(154,35,73,0.06)] py-8 max-[639px]:py-6">
             <p className="px-5 text-lg font-medium text-brand text-center max-[639px]:text-base italic">
-              Access to the Decision Space is reserved for selected applicants.
+              The artwork is complete.
+              <br />
+              The outcome of the experiment is still unwritten.
             </p>
           </div>
         </section>

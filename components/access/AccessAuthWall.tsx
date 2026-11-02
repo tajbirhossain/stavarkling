@@ -203,9 +203,10 @@ export default function AccessAuthWall() {
                   </>
                 ) : (
                   <>
-                    A private code has been sent to{' '}
-                    <br className="block max-[639px]:hidden" />
-                    <span className="text-brand italic break-all">{email.trim()}</span>
+                    A private code has been sent to
+                    <span className="mt-1 block text-brand italic break-all">
+                      {email.trim()}
+                    </span>
                   </>
                 )}
               </p>

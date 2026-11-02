@@ -139,15 +139,16 @@ const AccessApplicationStep3 = () => {
                 <h4 className="mb-4 text-lg font-bold text-brand max-[639px]:text-base">
                   {/* STEP <span className="fontCinzel font-medium">3</span> OF{' '}
                   <span className="fontCinzel font-medium">3</span> */}
-                  CONGRATULATIONS!
+                  PRIVATE ACCESS
                 </h4>
 
                 <h1 className="relative mb-13 max-[639px]:mb-10 text-[42px] max-[1023px]:text-[2.625rem] max-[639px]:text-[2rem] leading-12 max-[639px]:leading-tight font-semibold before:absolute before:bottom-[-1.25rem] before:left-1/2 before:h-0.5 before:w-10 before:-translate-x-1/2 before:bg-brand before:content-['']">
-                  APPLICATION RECEIVED
+                  REQUEST RECEIVED
                 </h1>
 
-                <p className="mb-10 max-[639px]:mb-8 text-xl font-medium text-brand italic leading-8 max-[639px]:text-lg">
-                  Your request has entered review.
+                <p className="mb-10 max-[639px]:mb-8 max-w-[400px] text-xl font-medium text-brand italic leading-8 max-[639px]:text-lg">
+                  I began this experiment with an artwork. A collector&rsquo;s
+                  decision could shape what happens next.
                 </p>
 
                 <div className="mb-10 max-[639px]:mb-8 h-px w-full bg-[rgba(154,35,73,0.25)]" />
@@ -160,22 +161,26 @@ const AccessApplicationStep3 = () => {
                   />
                 </div>
 
-                <p className="mb-8 max-[639px]:mb-6 max-w-[340px] text-lg max-[639px]:text-base leading-8 max-[639px]:leading-7 font-medium">
-                  Access to the Decision Space is reserved for selected
-                  applicants.
+                <p className="mb-8 max-[639px]:mb-6 max-w-[400px] text-lg max-[639px]:text-base leading-8 max-[639px]:leading-7 font-medium">
+                  You have opened the possibility of becoming that collector.
                 </p>
 
                 <span className="mb-6 block h-0.5 w-10 bg-brand" />
 
-                <p className="mb-10 max-w-[340px] text-lg leading-7 font-medium text-[#767676] max-[639px]:mb-8 max-[639px]:text-base">
-                  You will be notified by email once a decision has been made.
+                <p className="mb-6 max-w-[400px] text-lg leading-8 font-medium max-[639px]:mb-5 max-[639px]:text-base max-[639px]:leading-7">
+                  Your request is now with me. My reply will reach you by
+                  email.
+                </p>
+
+                <p className="mb-10 max-w-[400px] text-lg leading-7 font-medium text-[#767676] max-[639px]:mb-8 max-[639px]:text-base">
+                  The outcome of the experiment remains open.
                 </p>
 
                 <Link
-                  href="/"
+                  href="/artwork"
                   className="btnGradient mb-8 inline-flex w-auto items-center justify-center gap-x-4 px-8 py-4 text-lg duration-300 hover:gap-x-6 max-[639px]:w-full max-[639px]:py-3.5 max-[639px]:text-base"
                 >
-                  RETURN TO HOME
+                  RETURN TO THE ARTWORK
                   <img
                     src="/images/icons/arrow-right.png"
                     alt=""

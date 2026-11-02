@@ -4,6 +4,7 @@ import { cinzel } from '../fonts/cingel'
 import "./globals.css";
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
 import OnboardingGate from '@/components/onboarding/OnboardingGate'
+import LegalFooter from '@/components/LegalFooter'
 import Script from 'next/script'
 
 
@@ -27,7 +28,10 @@ export default function RootLayout({
           {`try{if(localStorage.getItem('stavarkling_onboarding_complete')==='1'){document.cookie='stavarkling_onboarding_complete=1; path=/; max-age=31536000; SameSite=Lax'}}catch(e){}`}
         </Script>
         <SmoothScrollProvider>
-          <OnboardingGate>{children}</OnboardingGate>
+          <OnboardingGate>
+            {children}
+            <LegalFooter />
+          </OnboardingGate>
         </SmoothScrollProvider>
       </body>
     </html>

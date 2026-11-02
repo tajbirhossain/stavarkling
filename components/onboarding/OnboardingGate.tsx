@@ -8,6 +8,7 @@ const OnboardingGate = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
   const router = useRouter()
   const isOnboarding = pathname.startsWith('/onboarding')
+  const isLegal = pathname === '/privacy' || pathname === '/terms'
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -18,13 +19,13 @@ const OnboardingGate = ({ children }: { children: React.ReactNode }) => {
       return
     }
 
-    if (!complete && !isOnboarding) {
+    if (!complete && !isOnboarding && !isLegal) {
       router.replace('/onboarding')
       return
     }
 
     setReady(true)
-  }, [pathname, router, isOnboarding])
+  }, [pathname, router, isOnboarding, isLegal])
 
   if (!ready) {
     return <div className="min-h-dvh w-full bg-[#F1E7E8]" />

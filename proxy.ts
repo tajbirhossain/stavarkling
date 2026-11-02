@@ -7,6 +7,12 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const completed = request.cookies.get(ONBOARDING_COOKIE_KEY)?.value === '1'
   const isOnboarding = pathname.startsWith('/onboarding')
+  // Legal pages must always be reachable, even before the intro is completed.
+  const isLegal = pathname === '/privacy' || pathname === '/terms'
+
+  if (isLegal) {
+    return NextResponse.next()
+  }
 
   if (!completed && !isOnboarding) {
     const url = request.nextUrl.clone()

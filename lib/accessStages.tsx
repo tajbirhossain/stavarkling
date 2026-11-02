@@ -50,19 +50,20 @@ export const JOURNEY_STAGES: JourneyStage[] = [
     id: 1,
     number: '01',
     title: 'THE BEGINNING',
-    description: 'Every historic decision sounds irrational at first.',
+    description: 'An artwork. An experiment.\nAn outcome yet to be decided.',
   },
   {
     id: 2,
     number: '02',
     title: 'THE MOMENT',
-    description: 'The impossible begins to feel possible.',
+    description:
+      'Imagine this artwork in your collection.\nConsider what it would mean to you.',
   },
   {
     id: 3,
     number: '03',
     title: 'THE DECISION',
-    description: 'Value is created because someone decides it is.',
+    description: 'Your acquisition becomes the answer.\nThe artwork becomes yours.',
   },
 ]
 
@@ -71,10 +72,11 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     label: 'ACCESS STAGE',
     heading: {
       title: 'THE BEGINNING',
-      subtitle: 'Every revolution begins with a single decision.',
+      subtitle: 'An artwork. An experiment.\nAn outcome yet to be decided.',
     },
-    body: ['Some experiences begin quietly. This is one of them.'],
-    invitation: 'This is not an approval.\nIt is an invitation.',
+    body: ['The artwork is complete.\nWhat happens next is still unwritten.'],
+    invitation:
+      'Begin with what you see.\nConsider what gives it value in your eyes.',
     nextSteps: {
       title: 'WHAT HAPPENS NEXT',
       beats: [
@@ -118,13 +120,16 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     },
   },
   2: {
-    label: 'STAGE',
+    label: 'ACCESS STAGE',
     heading: {
       title: 'THE MOMENT',
-      subtitle: 'There comes a moment when perception begins to shift.',
+      subtitle: 'Imagine this artwork in your collection.',
     },
-    body: ['Before the world believes, someone always believes first.'],
-    invitation: 'This moment belongs to one person.',
+    body: [
+      'The artwork would become part of your world.\nYour choice would become part of its story.',
+    ],
+    invitation:
+      'What begins as a personal connection\ncould become the decision that shapes this experiment.',
     nextSteps: {
       title: 'WHAT HAPPENS NEXT',
       beats: [
@@ -167,14 +172,15 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
     },
   },
   3: {
-    label: 'STAGE',
+    label: 'ACCESS STAGE',
     heading: {
       title: 'THE DECISION',
-      subtitle: 'Value does not wait for consensus.',
+      subtitle: 'Your acquisition becomes the answer.\nThe artwork becomes yours.',
     },
-    body: ['What happens next depends on one decision.'],
-    invitation:
-      'Before value is recognised by many, it is recognised by one.',
+    body: [
+      'One artwork. €1,000,000.\nAn experiment brought to life by an artist.\nCompleted by a collector.',
+    ],
+    invitation: 'The decision is yours.',
     nextSteps: {
       title: 'THE DECISION',
       beats: [

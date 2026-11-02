@@ -162,15 +162,17 @@ const OnboardingScreen = ({
         </div>
       </div>
 
-      <div className="onboard-meta absolute bottom-[max(1.75rem,env(safe-area-inset-bottom))] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center opacity-0 max-[767px]:bottom-[max(1.5rem,env(safe-area-inset-bottom))] max-[639px]:bottom-[max(1rem,env(safe-area-inset-bottom))]">
-        <p className="text-brand/50 text-lg font-medium tracking-[0.18em] max-[767px]:text-base max-[639px]:text-sm max-[639px]:tracking-[0.16em]">
-          {stepLabel} <span className="text-brand/25">/</span> {totalLabel}
-        </p>
-        <div className="mt-2.5 h-[2px] w-20 overflow-hidden bg-[rgba(154,35,73,0.16)] max-[639px]:mt-2 max-[639px]:w-16">
-          <div
-            className="h-full bg-brand transition-[width] duration-500"
-            style={{ width: `${progressPercent}%` }}
-          />
+      <div className="absolute bottom-[max(1.75rem,env(safe-area-inset-bottom))] left-1/2 z-10 -translate-x-1/2 max-[767px]:bottom-[max(1.5rem,env(safe-area-inset-bottom))] max-[639px]:bottom-[max(1rem,env(safe-area-inset-bottom))]">
+        <div className="onboard-meta flex flex-col items-center opacity-0">
+          <p className="text-brand/50 text-lg font-medium tracking-[0.18em] max-[767px]:text-base max-[639px]:text-sm max-[639px]:tracking-[0.16em]">
+            {stepLabel} <span className="text-brand/25">/</span> {totalLabel}
+          </p>
+          <div className="mt-2.5 h-[2px] w-20 overflow-hidden bg-[rgba(154,35,73,0.16)] max-[639px]:mt-2 max-[639px]:w-16">
+            <div
+              className="h-full bg-brand transition-[width] duration-500"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
         </div>
       </div>
     </div>
