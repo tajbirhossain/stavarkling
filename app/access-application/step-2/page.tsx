@@ -415,14 +415,6 @@ const AccessApplicationStep2 = () => {
                         A PERSONAL NOTE{' '}
                         <span className="font-medium text-sm italic">(OPTIONAL)</span>
                       </label>
-                      <p
-                        id="reason-prompt"
-                        className="mb-3 text-lg leading-7 font-medium text-[#2a2a2a] italic max-[639px]:text-base"
-                      >
-                        Imagine this artwork in your collection.
-                        <br />
-                        What made you choose it?
-                      </p>
                       <textarea
                         id="reason"
                         name="reason"
@@ -438,12 +430,15 @@ const AccessApplicationStep2 = () => {
                           clearFieldError('reason')
                         }}
                         onBlur={() => markTouched('reason')}
+                        placeholder={
+                          'Imagine this artwork in your collection.\nWhat made you choose it?'
+                        }
                         rows={5}
                         aria-invalid={Boolean(touched.reason && errors.reason)}
                         aria-describedby={
                           touched.reason && errors.reason
-                            ? 'reason-prompt reason-error'
-                            : 'reason-prompt reason-hint'
+                            ? 'reason-error'
+                            : 'reason-hint'
                         }
                         className={`w-full resize-none rounded-[10px] border bg-white/80 px-6 py-5 text-lg font-medium text-[#2a2a2a] italic outline-none transition-colors placeholder:text-[#b0a8ab] placeholder:italic disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-4 max-[639px]:text-base ${touched.reason && errors.reason
                             ? 'border-brand focus:border-brand'
