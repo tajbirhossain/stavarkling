@@ -2,6 +2,7 @@ import {
   parseAccessApplicationBody,
   createAccessApplication,
 } from '@/lib/accessApplicationsRepo'
+import { sendApplicationReceivedEmail } from '@/lib/resend'
 import { NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
@@ -70,6 +71,19 @@ export async function POST(request: Request) {
         },
         { status: result.status }
       )
+    }
+
+    // Confirm receipt only for a brand-new application, never for a retry.
+    // A mail failure must not undo or fail an application that is already saved.
+    if (!result.record.replayed) {
+      try {
+        await sendApplicationReceivedEmail({
+          to: draft.email.trim(),
+          fullName: draft.fullName,
+        })
+      } catch (mailErr) {
+        console.error('application confirmation email failed', mailErr)
+      }
     }
 
     return NextResponse.json(

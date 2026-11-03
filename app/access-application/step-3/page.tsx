@@ -202,7 +202,7 @@ const AccessApplicationStep3 = () => {
 
             <div className="mx-0 w-[50%] max-w-none max-[1023px]:mx-auto max-[1023px]:w-full max-[1023px]:max-w-[520px]">
               <h2 className='access-title relative mb-13 max-[639px]:mb-10 text-center text-7xl font-medium text-brand italic max-[1023px]:text-6xl max-[767px]:text-5xl max-[639px]:text-4xl before:absolute before:bottom-[-1.25rem] before:left-1/2 before:h-0.5 before:w-10 before:-translate-x-1/2 before:bg-brand before:content-[""]'>
-                A Universe. Decided.
+                Universe. Decided.
               </h2>
 
               <img

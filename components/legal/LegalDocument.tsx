@@ -64,7 +64,7 @@ export default function LegalDocument({
           <div className="space-y-12 max-[639px]:space-y-9">{children}</div>
 
           <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-brand/15 pt-8 text-base font-semibold max-[639px]:mt-12">
-            <Link href="/" className="text-brand underline-offset-4 hover:underline">
+            <Link href="/artwork" className="text-brand underline-offset-4 hover:underline">
               &larr; Return to the artwork
             </Link>
             <span className="text-[#767676]">

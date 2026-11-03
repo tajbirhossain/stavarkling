@@ -113,6 +113,9 @@ export default function Home() {
                 Universe.{" "}
                 <span className="block text-brand italic">Decided.</span>
               </h1>
+              <p className="hero-reveal mb-2 text-sm font-bold tracking-[0.2em] text-brand max-[639px]:text-xs">
+                A PRIVATE ACQUISITION
+              </p>
               <h2 className="hero-reveal fontCinzel mb-3 text-[32px] font-medium text-brand max-[639px]:text-[1.625rem]">
                 &euro; 1,000,000
               </h2>
@@ -167,10 +170,12 @@ export default function Home() {
               01.
             </h3>
             <h2 className="mb-3 text-center text-lg font-semibold max-[639px]:text-base">
-              PUBLIC WEBSITE
+              PUBLIC EXPERIENCE
             </h2>
             <p className="max-w-[270px] text-center text-lg font-semibold max-[639px]:text-base">
-              You can view the artwork and key details.
+              The artwork is revealed.
+              <br />
+              The question of value is left open.
             </p>
             <img
               src="/images/icons/arrow-right.png"
@@ -184,10 +189,12 @@ export default function Home() {
               02.
             </h3>
             <h2 className="mb-3 text-center text-lg font-semibold max-[639px]:text-base">
-              VIP ACCESS APPLICATION
+              PRIVATE ACCESS
             </h2>
             <p className="max-w-[270px] text-center text-lg font-semibold max-[639px]:text-base">
-              Submit your application. Not every request will be accepted.
+              Move closer to the work.
+              <br />
+              Consider its place in your collection.
             </p>
             <img
               src="/images/icons/arrow-right.png"
@@ -201,10 +208,12 @@ export default function Home() {
               03.
             </h3>
             <h2 className="mb-3 text-center text-lg font-semibold max-[639px]:text-base">
-              NOT MEANT FOR EVERYONE
+              SELECTION, NOT SCALE
             </h2>
-            <p className="max-w-[270px] text-center text-3xl font-semibold text-brand italic max-[639px]:text-2xl">
-              One person will understand.
+            <p className="max-w-[270px] text-center text-lg font-semibold max-[639px]:text-base">
+              A personal conviction.
+              <br />
+              The choice to acquire what you see value in.
             </p>
             <img
               src="/images/icons/arrow-right.png"
@@ -218,14 +227,14 @@ export default function Home() {
               04.
             </h3>
             <h2 className="mb-3 text-center text-lg font-semibold text-brand max-[639px]:text-base">
-              FINAL DECISION
+              THE ACQUISITION
             </h2>
             <p className="max-w-[300px] text-center text-lg font-semibold max-[639px]:text-base">
-              You may be invited to the final decision.{" "}
+              The final stage is private.
               <br />
-              One artwork. One Buyer.{" "}
-              <br className="block max-[639px]:hidden" />
-              <span className="text-brand">One million.</span>
+              The work enters your collection.
+              <br />
+              <span className="text-brand">Your decision enters its story.</span>
             </p>
           </div>
         </div>
@@ -248,7 +257,7 @@ export default function Home() {
                 />
                 <h3 className="text-center text-sm font-bold max-[639px]:text-xs">
                   <span className="fontCinzel text-brand">01. </span>
-                  PUBLIC WEBSITE
+                  PUBLIC EXPERIENCE
                 </h3>
                 <img
                   src="/images/icons/eye-icon.png"
@@ -259,15 +268,17 @@ export default function Home() {
               <div className="mb-4 flex h-fit flex-row gap-y-0 max-2xl:flex-col max-2xl:gap-y-5 max-[1279px]:flex-row max-[1279px]:gap-y-0 max-[767px]:flex-col max-[767px]:gap-y-5">
                 <div className="w-1/2 max-2xl:w-full max-[1279px]:w-1/2 max-[767px]:w-full">
                   <h2 className="relative mb-6 text-center text-3xl font-bold max-[639px]:text-2xl before:absolute before:bottom-[-0.75rem] before:left-1/2 before:h-0.5 before:w-8 before:-translate-x-1/2 before:bg-brand before:content-['']">
-                    A Universe,
+                    Universe.
                     <br />
-                    <span className="text-brand italic">Decided</span>
+                    <span className="text-brand italic">Decided.</span>
                   </h2>
                   <h3 className="fontCinzel mb-3 text-center text-lg font-semibold text-brand max-[639px]:text-base">
                     &euro;1,000,000
                   </h3>
                   <p className="text-center font-semibold">
-                    This is not a public sale. Access is limited
+                    The artwork is revealed.
+                    <br />
+                    The question of value is left open.
                   </p>
                 </div>
                 <div className="flex h-auto w-1/2 items-center justify-center max-2xl:w-full max-[1279px]:w-1/2 max-[767px]:w-full">
@@ -316,7 +327,7 @@ export default function Home() {
                 />
                 <h3 className="text-center text-sm font-bold max-[639px]:text-xs">
                   <span className="fontCinzel text-brand">02. </span>
-                  VIP ACCESS APPLICATION
+                  PRIVATE ACCESS
                 </h3>
                 <img
                   src="/images/icons/lock.png"
@@ -326,12 +337,10 @@ export default function Home() {
               </div>
               <div className="mb-4 max-w-40 max-[767px]:mx-auto max-[767px]:max-w-none max-[767px]:text-center max-[639px]:max-w-none">
                 <p className="relative mb-6 text-xl font-bold max-[767px]:before:left-1/2 max-[767px]:before:-translate-x-1/2 max-[639px]:text-lg before:absolute before:bottom-[-0.75rem] before:left-0 before:h-0.5 before:w-6 before:bg-brand before:content-['']">
-                  Access is limited.{" "}
-                  <br />
-                  Not every request will be accepted
+                  Move closer to the work.
                 </p>
                 <p className="font-semibold">
-                  To request access, please answer few questions.
+                  Consider its place in your collection.
                 </p>
               </div>
             </div>
@@ -368,7 +377,7 @@ export default function Home() {
                 />
                 <h3 className="text-center text-sm font-bold max-[639px]:text-xs">
                   <span className="fontCinzel text-brand">03. </span>
-                  NOT MEANT FOR EVERYONE
+                  SELECTION, NOT SCALE
                 </h3>
                 <img
                   src="/images/icons/lock.png"
@@ -376,14 +385,11 @@ export default function Home() {
                   className="w-4 shrink-0"
                 />
               </div>
-              <p className="mb-4 text-sm font-bold tracking-wide text-brand">
-                SELECTION, NOT SCALE
-              </p>
               <p className="relative mb-6 text-[28px] leading-snug font-semibold text-brand italic max-[767px]:before:left-1/2 max-[767px]:before:-translate-x-1/2 max-[639px]:text-[1.5rem] before:absolute before:bottom-[-0.75rem] before:left-0 before:h-0.5 before:w-10 before:bg-brand before:content-['']">
-                One person will understand.
+                A personal conviction.
               </p>
-              <p className="max-w-[200px] font-semibold text-brand/80 max-[767px]:mx-auto">
-                This is not designed for a crowd. It is designed for recognition.
+              <p className="max-w-[220px] font-semibold text-brand/80 max-[767px]:mx-auto">
+                The choice to acquire what you see value in.
               </p>
             </div>
             <p className="relative z-10 text-sm font-bold tracking-wide text-brand/70 max-[767px]:text-center">
@@ -400,7 +406,7 @@ export default function Home() {
               />
               <h3 className="text-center text-sm font-bold max-[639px]:text-xs">
                 <span className="fontCinzel text-brand">04. </span>
-                FINAL DECISION
+                THE ACQUISITION
               </h3>
               <img
                 src="/images/icons/lock.png"
@@ -411,12 +417,11 @@ export default function Home() {
             <div className="flex items-center max-[767px]:flex-col max-[767px]:gap-y-5">
               <div className="w-[52%] pr-4 max-[767px]:w-full max-[767px]:pr-0 max-[767px]:text-center">
                 <p className="mb-6 text-lg font-semibold max-[639px]:text-base">
-                  You may be invited to the final decision.
+                  The final stage is private.
                 </p>
                 <p className="text-lg font-semibold max-[639px]:text-base">
-                  One artwork. <br />
-                  One buyer. <br />
-                  <span className="text-brand">One million</span>
+                  The work enters your collection. <br />
+                  <span className="text-brand">Your decision enters its story.</span>
                 </p>
               </div>
               <div className="flex w-[48%] items-center justify-center max-[767px]:w-full">

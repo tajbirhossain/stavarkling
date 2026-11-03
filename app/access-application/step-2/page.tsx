@@ -415,6 +415,14 @@ const AccessApplicationStep2 = () => {
                         A PERSONAL NOTE{' '}
                         <span className="font-medium text-sm italic">(OPTIONAL)</span>
                       </label>
+                      <p
+                        id="reason-prompt"
+                        className="mb-3 text-lg leading-7 font-medium text-[#2a2a2a] italic max-[639px]:text-base"
+                      >
+                        Imagine this artwork in your collection.
+                        <br />
+                        What made you choose it?
+                      </p>
                       <textarea
                         id="reason"
                         name="reason"
@@ -430,13 +438,12 @@ const AccessApplicationStep2 = () => {
                           clearFieldError('reason')
                         }}
                         onBlur={() => markTouched('reason')}
-                        placeholder="Share what convinced you to continue."
                         rows={5}
                         aria-invalid={Boolean(touched.reason && errors.reason)}
                         aria-describedby={
                           touched.reason && errors.reason
-                            ? 'reason-error'
-                            : 'reason-hint'
+                            ? 'reason-prompt reason-error'
+                            : 'reason-prompt reason-hint'
                         }
                         className={`w-full resize-none rounded-[10px] border bg-white/80 px-6 py-5 text-lg font-medium text-[#2a2a2a] italic outline-none transition-colors placeholder:text-[#b0a8ab] placeholder:italic disabled:opacity-60 max-[639px]:px-4 max-[639px]:py-4 max-[639px]:text-base ${touched.reason && errors.reason
                             ? 'border-brand focus:border-brand'
@@ -522,7 +529,7 @@ const AccessApplicationStep2 = () => {
 
             <div className="mx-0 w-[50%] max-w-none max-[1023px]:mx-auto max-[1023px]:w-full max-[1023px]:max-w-[520px]">
               <h2 className='access-title relative mb-13 max-[639px]:mb-10 text-center text-7xl font-medium text-brand italic max-[1023px]:text-6xl max-[767px]:text-5xl max-[639px]:text-4xl before:absolute before:bottom-[-1.25rem] before:left-1/2 before:h-0.5 before:w-10 before:-translate-x-1/2 before:bg-brand before:content-[""]'>
-                A Universe. Decided.
+                Universe. Decided.
               </h2>
 
               <img

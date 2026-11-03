@@ -86,7 +86,7 @@ COMMENT ON COLUMN access_applications.panel_stage IS
 -- One active application per email (blocks duplicate pending/in-review orders)
 CREATE UNIQUE INDEX IF NOT EXISTS access_applications_email_active_uidx
   ON access_applications (email_normalized)
-  WHERE status IN ('pending', 'under_review');
+  WHERE status IN ('pending', 'under_review', 'approved');
 
 CREATE INDEX IF NOT EXISTS access_applications_status_created_idx
   ON access_applications (status, created_at DESC);

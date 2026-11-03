@@ -52,6 +52,16 @@ function toRecord(row: DbRow, replayed: boolean): AccessApplicationRecord {
   }
 }
 
+function activeEmailConflict(existingStatus: string) {
+  const conflict = new Error('ACTIVE_EMAIL_EXISTS') as Error & {
+    code: 'ACTIVE_EMAIL_EXISTS'
+    existingStatus: string
+  }
+  conflict.code = 'ACTIVE_EMAIL_EXISTS'
+  conflict.existingStatus = existingStatus
+  return conflict
+}
+
 export async function createAccessApplication(input: {
   payload: AccessApplicationSubmitPayload
   clientIp: string | null
@@ -80,6 +90,21 @@ export async function createAccessApplication(input: {
     const record = await withClient(async (client) => {
       const existing = await findByIdempotencyKey(client, payload.idempotencyKey)
       if (existing) return toRecord(existing, true)
+
+      // One open or approved application per email. The unique index only
+      // covers pending/under_review, so approved members must be checked here.
+      const open = await client.query<{ status: string }>(
+        `SELECT status
+         FROM access_applications
+         WHERE email_normalized = lower(btrim($1))
+           AND status IN ('pending', 'under_review', 'approved')
+         ORDER BY CASE status WHEN 'approved' THEN 0 ELSE 1 END
+         LIMIT 1`,
+        [payload.email]
+      )
+      if (open.rows[0]) {
+        throw activeEmailConflict(open.rows[0].status)
+      }
 
       try {
         const inserted = await client.query<DbRow>(
@@ -114,11 +139,7 @@ export async function createAccessApplication(input: {
 
         // Active application already exists for this email
         if (isUniqueViolation(err, 'access_applications_email_active_uidx')) {
-          const conflict = new Error('ACTIVE_EMAIL_EXISTS') as Error & {
-            code: 'ACTIVE_EMAIL_EXISTS'
-          }
-          conflict.code = 'ACTIVE_EMAIL_EXISTS'
-          throw conflict
+          throw activeEmailConflict('pending')
         }
 
         throw err
@@ -133,14 +154,23 @@ export async function createAccessApplication(input: {
       'code' in err &&
       err.code === 'ACTIVE_EMAIL_EXISTS'
     ) {
+      const alreadyApproved =
+        'existingStatus' in err && err.existingStatus === 'approved'
+
       return {
         ok: false,
         status: 409,
-        errors: {
-          email:
-            'An application with this email is already under review. We will notify you by email.',
-          form: 'Duplicate request blocked.',
-        },
+        errors: alreadyApproved
+          ? {
+              email:
+                'This email address already has access. Please use Access to sign in with a one-time code.',
+              form: 'You already have access with this email address.',
+            }
+          : {
+              email:
+                'We already have a request from this email address and it is under review. There is no need to apply again. We will reply by email.',
+              form: 'Your request is already with us. Please check your inbox for our confirmation.',
+            },
       }
     }
 
