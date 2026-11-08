@@ -2,13 +2,22 @@
 
 import Header from '@/components/Header'
 import ConfidentialFooter from '@/components/access/ConfidentialFooter'
+import AcquisitionConversation from '@/components/access/AcquisitionConversation'
 import React, { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
 const CONTACT_EMAIL = 'private@stavarkling.com'
 
-const PrivateAcquisitionContent = () => {
+type PrivateAcquisitionContentProps = {
+  firstName: string
+  existingCreatedAt: string | null
+}
+
+const PrivateAcquisitionContent = ({
+  firstName,
+  existingCreatedAt,
+}: PrivateAcquisitionContentProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
@@ -92,27 +101,11 @@ const PrivateAcquisitionContent = () => {
                 </p>
               </div>
 
-              <div className="access-reveal mb-10 flex flex-col items-start gap-4 max-[1023px]:items-center">
-                <a
-                  href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-                    'Private acquisition — Stavarkle #1'
-                  )}`}
-                  className="btnGradient inline-flex items-center justify-center gap-x-7 px-6 py-3 text-lg duration-300 hover:gap-x-9 max-[639px]:gap-x-5 max-[639px]:px-5 max-[639px]:text-base"
-                >
-                  BEGIN THE CONVERSATION
-                  <img
-                    src="/images/icons/arrow-right.png"
-                    alt=""
-                    className="w-5 brightness-[100]"
-                  />
-                </a>
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="text-lg font-medium tracking-wide text-brand underline-offset-4 duration-300 hover:underline max-[639px]:text-base"
-                >
-                  {CONTACT_EMAIL}
-                </a>
-              </div>
+              <AcquisitionConversation
+                firstName={firstName}
+                contactEmail={CONTACT_EMAIL}
+                existingCreatedAt={existingCreatedAt}
+              />
 
               <p className="access-reveal max-w-xl border-l-2 border-brand/40 pl-5 text-base leading-7 font-medium text-[#5f5f5f] max-[1023px]:mx-auto max-[1023px]:border-t max-[1023px]:border-l-0 max-[1023px]:border-brand/30 max-[1023px]:pt-5 max-[1023px]:pl-0 max-[639px]:text-[15px] max-[639px]:leading-6">
                 Your enquiry begins a private conversation about acquiring this
