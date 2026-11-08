@@ -3,8 +3,6 @@ import { withClient } from '@/lib/db'
 export type AcquisitionStatus =
   | 'received'
   | 'in_conversation'
-  | 'handover_open'
-  | 'handover_submitted'
   | 'completed'
   | 'closed'
 
@@ -13,9 +11,6 @@ export type AcquisitionEnquiry = {
   status: AcquisitionStatus
   createdAt: Date
 }
-
-export const CONTACT_METHODS = ['email', 'phone', 'video'] as const
-export type ContactMethod = (typeof CONTACT_METHODS)[number]
 
 type EnquiryRow = {
   id: string
@@ -44,32 +39,18 @@ export async function getAcquisitionEnquiry(
 
 export async function createAcquisitionEnquiry(input: {
   applicationId: string
-  placeAnswer: string
-  drawAnswer: string | null
-  contactMethod: ContactMethod
-  contactDetail: string | null
-  bestTime: string | null
+  message: string | null
   clientIp: string | null
   userAgent: string | null
 }): Promise<{ created: boolean; enquiry: AcquisitionEnquiry }> {
   return withClient(async (client) => {
     const inserted = await client.query<EnquiryRow>(
       `INSERT INTO acquisition_enquiries (
-         application_id, place_answer, draw_answer, contact_method,
-         contact_detail, best_time, client_ip, user_agent
-       ) VALUES ($1, $2, $3, $4, $5, $6, $7::inet, $8)
+         application_id, message, client_ip, user_agent
+       ) VALUES ($1, $2, $3::inet, $4)
        ON CONFLICT (application_id) DO NOTHING
        RETURNING id, status, created_at`,
-      [
-        input.applicationId,
-        input.placeAnswer,
-        input.drawAnswer,
-        input.contactMethod,
-        input.contactDetail,
-        input.bestTime,
-        input.clientIp,
-        input.userAgent,
-      ]
+      [input.applicationId, input.message, input.clientIp, input.userAgent]
     )
 
     if (inserted.rows[0]) {

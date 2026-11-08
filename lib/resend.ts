@@ -131,49 +131,36 @@ export async function sendApplicationReceivedEmail(input: {
   }
 }
 
-/** Sent to the artist's inbox when a collector begins the private conversation. */
+/** Sent to the artist's inbox when a collector requests the private acquisition. */
 export async function sendAcquisitionEnquiryAlertEmail(input: {
   fullName: string
   email: string
   country: string | null
-  placeAnswer: string
-  drawAnswer: string | null
-  contactMethod: string
-  contactDetail: string | null
-  bestTime: string | null
+  message: string | null
 }) {
   const resend = getResend()
-  const row = (label: string, value: string | null) =>
-    value
-      ? `<p style="margin:0 0 14px;"><strong>${label}</strong><br />${escapeHtml(value).replace(/\n/g, '<br />')}</p>`
-      : ''
-
   const who = `${input.fullName} <${input.email}>${input.country ? ` - ${input.country}` : ''}`
-  const how = `${input.contactMethod}${input.contactDetail ? ` - ${input.contactDetail}` : ''}`
+  const messageHtml = input.message
+    ? `<p style="margin:0 0 14px;"><strong>Their message</strong><br />${escapeHtml(input.message).replace(/\n/g, '<br />')}</p>`
+    : ''
 
   const { error } = await resend.emails.send({
     from: getFromEmail(),
     to: LEGAL.contactEmail,
     replyTo: input.email,
-    subject: `Private acquisition enquiry - ${input.fullName}`,
+    subject: `Private acquisition request - ${input.fullName}`,
     html: `
       <div style="font-family: Georgia, 'Times New Roman', serif; font-size:16px; line-height:1.6; color:#2a2a2a; max-width:560px;">
-        <p style="margin:0 0 18px;">A collector has begun the private conversation. Please reply within 24 hours.</p>
-        ${row('Collector', who)}
-        ${row('Where they would place it', input.placeAnswer)}
-        ${row('What drew them to it', input.drawAnswer)}
-        ${row('Preferred contact', how)}
-        ${row('Best time', input.bestTime)}
+        <p style="margin:0 0 18px;">A collector has requested the private acquisition of Stavarkle #1 for &euro;1,000,000. Please reply within 24 hours. It is also in the admin panel.</p>
+        <p style="margin:0 0 14px;"><strong>Collector</strong><br />${escapeHtml(who)}</p>
+        ${messageHtml}
       </div>
     `,
     text: [
-      'A collector has begun the private conversation. Please reply within 24 hours.',
+      'A collector has requested the private acquisition of Stavarkle #1 for EUR 1,000,000. Please reply within 24 hours. It is also in the admin panel.',
       '',
       `Collector: ${who}`,
-      `Where they would place it: ${input.placeAnswer}`,
-      input.drawAnswer ? `What drew them to it: ${input.drawAnswer}` : '',
-      `Preferred contact: ${how}`,
-      input.bestTime ? `Best time: ${input.bestTime}` : '',
+      input.message ? `Their message: ${input.message}` : '',
     ]
       .filter(Boolean)
       .join('\n'),
@@ -184,7 +171,7 @@ export async function sendAcquisitionEnquiryAlertEmail(input: {
   }
 }
 
-/** Confirmation to the collector that their private conversation has begun. */
+/** Confirmation to the collector that their private acquisition request was received. */
 export async function sendAcquisitionConfirmationEmail(input: {
   to: string
   fullName: string
@@ -197,18 +184,27 @@ export async function sendAcquisitionConfirmationEmail(input: {
     from: getFromEmail(),
     to: input.to,
     replyTo: contact,
-    subject: 'Your private conversation has begun',
+    subject: 'Your private acquisition request has been received',
     html: `
       <div style="font-family: Georgia, 'Times New Roman', serif; background:#f1e7e8; padding:40px 20px; color:#2a2a2a;">
         <div style="max-width:520px; margin:0 auto; background:#fff; border:1px solid rgba(154,35,73,0.2); border-radius:12px; padding:40px 36px;">
           <p style="margin:0 0 12px; text-align:center; color:#9a2349; letter-spacing:0.22em; font-size:12px; text-transform:uppercase;">Private Acquisition</p>
-          <h1 style="margin:0 0 24px; text-align:center; font-size:28px; font-weight:500;">The conversation has begun</h1>
+          <h1 style="margin:0 0 24px; text-align:center; font-size:28px; font-weight:500;">Your request has been received</h1>
           <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">Dear ${escapeHtml(first)},</p>
           <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">
-            Thank you. The artist will reply to you personally within 24 hours.
+            Thank you. You have expressed your interest in acquiring
+            <em>Stavarkle #1 &mdash; Universe. Decided.</em> for &euro;1,000,000.
+            The artist will be in touch with you personally within 24 hours.
+          </p>
+          <p style="margin:24px 0 8px; color:#9a2349; letter-spacing:0.16em; font-size:12px; text-transform:uppercase;">What happens next</p>
+          <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">
+            The purchase agreement, payment, documentation and delivery of the artwork
+            are all arranged privately between you and the artist. No payment is taken
+            through the website, and no bank details are ever shown on it.
           </p>
           <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">
-            Your enquiry does not confirm a purchase, reserve the artwork or transfer ownership.
+            Your request does not create a binding purchase agreement, reserve the
+            artwork or transfer ownership.
           </p>
           <p style="margin:24px 0 0; font-size:14px; line-height:1.6; color:#767676; font-style:italic;">
             Questions: ${escapeHtml(contact)}.
@@ -219,8 +215,11 @@ export async function sendAcquisitionConfirmationEmail(input: {
     text: [
       `Dear ${first},`,
       '',
-      'Thank you. The artist will reply to you personally within 24 hours.',
-      'Your enquiry does not confirm a purchase, reserve the artwork or transfer ownership.',
+      'Thank you. You have expressed your interest in acquiring Stavarkle #1 - Universe. Decided. for EUR 1,000,000. The artist will be in touch with you personally within 24 hours.',
+      '',
+      'What happens next: the purchase agreement, payment, documentation and delivery of the artwork are all arranged privately between you and the artist. No payment is taken through the website, and no bank details are ever shown on it.',
+      '',
+      'Your request does not create a binding purchase agreement, reserve the artwork or transfer ownership.',
       '',
       `Questions: ${contact}`,
     ].join('\n'),

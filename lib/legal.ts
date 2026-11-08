@@ -9,7 +9,7 @@ export const LEGAL = {
   /** Optional. When set, shown as the postal address in both documents. */
   postalAddress: '',
   contactEmail: 'private@stavarkling.com',
-  lastUpdated: '2 November 2026',
+  lastUpdated: '8 November 2026',
   /** Retention of application records after the last contact, in months. */
   applicationRetentionMonths: 24,
   verificationCodeMinutes: 10,

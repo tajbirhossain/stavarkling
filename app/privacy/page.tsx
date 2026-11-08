@@ -64,6 +64,11 @@ export default function PrivacyPage() {
             and any request you make to move to the next stage, with the time it was made.
           </LegalItem>
           <LegalItem>
+            <strong>When you request a private acquisition:</strong> the request itself, the time it
+            was made and any optional message you choose to write. Your name, email and country come
+            from your application.
+          </LegalItem>
+          <LegalItem>
             <strong>Technical data with your submissions:</strong> your IP address and browser or
             device details (user agent), recorded when you submit an application or a request. We use
             these to protect the site against abuse and duplicate or automated submissions.
@@ -75,8 +80,9 @@ export default function PrivacyPage() {
           </LegalItem>
         </LegalList>
         <p>
-          We do not ask for payment details on this website. If an acquisition goes ahead, payment is
-          arranged privately and separately.
+          We do not ask for payment details on this website, and no bank details are ever shown on it.
+          If an acquisition goes ahead, the purchase agreement, payment, documentation and delivery
+          are arranged privately and separately between you and the artist.
         </p>
       </LegalSection>
 
@@ -139,8 +145,8 @@ export default function PrivacyPage() {
       <LegalSection number="05" title="Who we share data with">
         <p>We do not sell or rent personal data. We use a few service providers who process data only on our instructions:</p>
         <LegalList>
-          <LegalItem>Database hosting (Supabase) &mdash; stores applications, access records and requests.</LegalItem>
-          <LegalItem>Email delivery (Resend) &mdash; sends your verification codes.</LegalItem>
+          <LegalItem>Database hosting (Supabase) &mdash; stores applications, access records and requests, including private acquisition requests.</LegalItem>
+          <LegalItem>Email delivery (Resend) &mdash; sends your verification codes and the confirmation emails about your applications and requests.</LegalItem>
           <LegalItem>Mailbox provider (Zoho Mail) &mdash; hosts the mailbox we use to correspond with you.</LegalItem>
           <LegalItem>Website hosting &mdash; serves the site and processes technical request data.</LegalItem>
         </LegalList>

@@ -95,9 +95,9 @@ const PrivateAcquisitionContent = ({
                   </span>
                 </p>
                 <p>
-                  Begin a private conversation with the artist about acquiring
-                  Stavarkle #1,{' '}
-                  <span className="text-brand">Universe. Decided.</span>
+                  Express your interest in acquiring Stavarkle #1,{' '}
+                  <span className="text-brand">Universe. Decided.</span>{' '}
+                  for &euro;1,000,000.
                 </p>
               </div>
 
@@ -108,7 +108,7 @@ const PrivateAcquisitionContent = ({
               />
 
               <p className="access-reveal max-w-xl border-l-2 border-brand/40 pl-5 text-base leading-7 font-medium text-[#5f5f5f] max-[1023px]:mx-auto max-[1023px]:border-t max-[1023px]:border-l-0 max-[1023px]:border-brand/30 max-[1023px]:pt-5 max-[1023px]:pl-0 max-[639px]:text-[15px] max-[639px]:leading-6">
-                Your enquiry begins a private conversation about acquiring this
+                Your request begins a private conversation about acquiring this
                 artwork. It does not confirm a purchase, reserve the artwork or
                 transfer ownership.
               </p>
