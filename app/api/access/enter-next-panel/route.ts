@@ -1,17 +1,26 @@
 import { enterNextPanel } from '@/lib/accessPanelStage'
 import { getAccessSession } from '@/lib/accessSession'
+import { accessPathForStage } from '@/lib/requireAccessStage'
+import { isStoredAccessStage } from '@/lib/accessStages'
 import { NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
 
-export async function POST() {
+export async function POST(request: Request) {
   const session = await getAccessSession()
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 })
   }
 
   try {
-    const result = await enterNextPanel(session.applicationId)
+    const body = (await request.json().catch(() => null)) as {
+      fromStage?: unknown
+    } | null
+    const fromStage = isStoredAccessStage(body?.fromStage)
+      ? body.fromStage
+      : undefined
+
+    const result = await enterNextPanel(session.applicationId, fromStage)
 
     if (!result.ok) {
       if (result.reason === 'not_found') {
@@ -22,6 +31,7 @@ export async function POST() {
           error: 'The next stage is not available yet.',
           accessStage: session.accessStage,
           panelStage: session.panelStage,
+          path: accessPathForStage(session.panelStage),
         },
         { status: 409 }
       )

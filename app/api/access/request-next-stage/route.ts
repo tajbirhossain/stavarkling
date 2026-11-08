@@ -1,4 +1,5 @@
 import { getAccessSession } from '@/lib/accessSession'
+import { accessPathForStage } from '@/lib/requireAccessStage'
 import {
   createStageRequest,
   getStageRequest,
@@ -31,6 +32,7 @@ export async function GET() {
     return NextResponse.json({
       accessStage: session.accessStage,
       panelStage: session.panelStage,
+      path: accessPathForStage(session.panelStage),
       alreadyRequested: Boolean(request),
       requestedAt: request?.requestedAt?.toISOString() ?? null,
     })

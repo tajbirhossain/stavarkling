@@ -79,6 +79,41 @@ const NextStepsCard = ({
     }
   }, [requested, liveMemberStage, pageStage])
 
+  // Stale tab or second device: when the member returns to this page, make sure
+  // it still matches the panel they are actually on.
+  useEffect(() => {
+    let cancelled = false
+
+    const resync = async () => {
+      if (document.visibilityState === 'hidden') return
+      try {
+        const res = await fetch('/api/access/request-next-stage')
+        if (!res.ok || cancelled) return
+        const data = (await res.json()) as {
+          accessStage?: unknown
+          panelStage?: unknown
+          path?: string
+        }
+        if (isStoredAccessStage(data.accessStage)) {
+          setLiveMemberStage(data.accessStage)
+        }
+        if (data.path && data.panelStage !== pageStage) {
+          router.replace(data.path)
+        }
+      } catch {
+        // Ignore transient network errors.
+      }
+    }
+
+    document.addEventListener('visibilitychange', resync)
+    window.addEventListener('focus', resync)
+    return () => {
+      cancelled = true
+      document.removeEventListener('visibilitychange', resync)
+      window.removeEventListener('focus', resync)
+    }
+  }, [pageStage, router])
+
   const canAdvance =
     liveMemberStage > pageStage &&
     Boolean(content.advanceCta) &&
@@ -98,10 +133,19 @@ const NextStepsCard = ({
       try {
         const res = await fetch('/api/access/enter-next-panel', {
           method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fromStage: pageStage }),
         })
         const data = (await res.json()) as {
           path?: string
           error?: string
+          panelStage?: unknown
+        }
+
+        // This page is out of date: the member is already on another panel.
+        if (!res.ok && data.path && data.panelStage !== pageStage) {
+          router.push(data.path)
+          return
         }
 
         if (!res.ok) {

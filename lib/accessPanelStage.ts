@@ -16,7 +16,8 @@ export type EnterNextPanelResult =
  * Called when the member clicks ENTER THE MOMENT / PROCEED TO THE DECISION.
  */
 export async function enterNextPanel(
-  applicationId: string
+  applicationId: string,
+  fromStage?: AccessStage
 ): Promise<EnterNextPanelResult> {
   return withTransaction(async (client) => {
     const current = await client.query<{
@@ -36,6 +37,17 @@ export async function enterNextPanel(
 
     const accessStage = row.access_stage as AccessStage
     const panelStage = row.panel_stage as AccessStage
+
+    // The page the member clicked on is out of date (another tab or device
+    // already moved them on). Send them to the panel they are actually on.
+    if (fromStage && panelStage > fromStage) {
+      return {
+        ok: true as const,
+        panelStage,
+        accessStage,
+        path: accessPathForStage(panelStage),
+      }
+    }
 
     if (panelStage >= accessStage || panelStage >= 3) {
       return { ok: false as const, reason: 'not_ready' as const }
