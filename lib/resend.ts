@@ -192,28 +192,113 @@ export async function sendAcquisitionConfirmationEmail(input: {
     replyTo: contact,
     subject: 'Your private enquiry about Universe. Decided.',
     html: `
-      <div style="font-family: Georgia, 'Times New Roman', serif; background:#f1e7e8; padding:40px 20px; color:#2a2a2a;">
-        <div style="max-width:520px; margin:0 auto; background:#fff; border:1px solid rgba(154,35,73,0.2); border-radius:12px; padding:40px 36px;">
-          <p style="margin:0 0 12px; text-align:center; color:#9a2349; letter-spacing:0.22em; font-size:12px; text-transform:uppercase;">Private Acquisition</p>
-          <h1 style="margin:0 0 24px; text-align:center; font-size:28px; font-weight:500;">Your enquiry has been received</h1>
-          <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">Dear ${escapeHtml(first)},</p>
-          <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">
-            Thank you for your interest in acquiring <em>Universe. Decided.</em> (Stavarkle #1) for &euro;1,000,000.
-          </p>
-          <p style="margin:24px 0 8px; color:#9a2349; letter-spacing:0.16em; font-size:12px; text-transform:uppercase;">What happens next</p>
-          <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">
-            The artist will reply to you personally by email. If you decide to proceed, you and the
-            artist will agree on the terms of the purchase and arrange payment, documentation and
-            delivery privately. No payment is taken through the website.
-          </p>
-          <p style="margin:0 0 16px; font-size:16px; line-height:1.65;">
-            Your enquiry does not confirm a purchase, reserve the artwork or transfer ownership.
-          </p>
-          <p style="margin:24px 0 0; text-align:center; font-size:14px; line-height:1.6;">
-            <a href="mailto:${escapeHtml(contact)}" style="color:#9a2349; text-decoration:none;">${escapeHtml(contact)}</a>
-          </p>
-        </div>
-      </div>
+      <!doctype html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="color-scheme" content="light only" />
+          <meta name="supported-color-schemes" content="light only" />
+          <title>Your private enquiry about Universe. Decided.</title>
+        </head>
+        <body style="margin:0; padding:0; background:#f6eef0;" bgcolor="#f6eef0">
+          <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:#f6eef0;">
+            Thank you for your interest in acquiring Universe. Decided. (Stavarkle #1).
+          </div>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f6eef0" style="background:#f6eef0;">
+            <tr>
+              <td align="center" style="padding:36px 14px 44px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:580px;">
+                  <tr>
+                    <td align="center" aria-hidden="true" style="padding:0 0 8px; font-family:Georgia,'Times New Roman',serif; font-size:12px; line-height:1; letter-spacing:0.9em; color:#d8b9c4;">
+                      &middot; &#10023; &middot; &#8902; &middot; &#10022; &middot;
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="padding:14px 0 24px; font-family:Georgia,'Times New Roman',serif; font-size:13px; letter-spacing:0.55em; color:#9a2349; text-transform:uppercase;">
+                      Stavarkling
+                    </td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#fffdfd" style="background:#fffdfd; border:1px solid #ecd5dc; border-radius:18px;">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td align="center" aria-hidden="true" style="padding:40px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:15px; line-height:1; letter-spacing:0.7em; color:#c8708e;">
+                            &#10022; &#10023; &#10022;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="center" style="padding:20px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:11px; letter-spacing:0.34em; color:#9a2349; text-transform:uppercase;">
+                            Private Acquisition
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="center" style="padding:14px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:31px; line-height:1.25; font-weight:normal; color:#2a1f23;">
+                            Your enquiry has been received
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="center" aria-hidden="true" style="padding:22px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:13px; line-height:1; letter-spacing:0.6em; color:#d3a3b4;">
+                            &middot; &#10022; &middot;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:30px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:17px; line-height:1.75; color:#2a1f23;">
+                            Dear ${escapeHtml(first)},
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:14px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:17px; line-height:1.75; color:#2a1f23;">
+                            Thank you for your interest in acquiring <em>Universe. Decided.</em> (Stavarkle #1) for &euro;1,000,000.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:28px 40px 0;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fbf1f4" style="background:#fbf1f4; border:1px solid #f0d6df; border-radius:14px;">
+                              <tr>
+                                <td style="padding:24px 26px;">
+                                  <div style="font-family:Georgia,'Times New Roman',serif; font-size:11px; letter-spacing:0.3em; color:#9a2349; text-transform:uppercase; padding:0 0 12px;">
+                                    <span aria-hidden="true" style="color:#c8708e;">&#10022;&nbsp;</span>What happens next
+                                  </div>
+                                  <div style="font-family:Georgia,'Times New Roman',serif; font-size:16px; line-height:1.75; color:#3a2f33;">
+                                    The artist will reply to you personally by email. If you decide to proceed, you and the
+                                    artist will agree on the terms of the purchase and arrange payment, documentation and
+                                    delivery privately. No payment is taken through the website.
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:26px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:16px; line-height:1.75; font-style:italic; color:#6b5f63;">
+                            Your enquiry does not confirm a purchase, reserve the artwork or transfer ownership.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="center" aria-hidden="true" style="padding:34px 40px 0; font-family:Georgia,'Times New Roman',serif; font-size:13px; line-height:1; letter-spacing:0.6em; color:#d3a3b4;">
+                            &middot; &#10022; &middot;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="center" style="padding:20px 40px 42px; font-family:Georgia,'Times New Roman',serif; font-size:15px; letter-spacing:0.06em;">
+                            <a href="mailto:${escapeHtml(contact)}" style="color:#9a2349; text-decoration:none;">${escapeHtml(contact)}</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" aria-hidden="true" style="padding:26px 0 0; font-family:Georgia,'Times New Roman',serif; font-size:12px; line-height:1; letter-spacing:0.9em; color:#d8b9c4;">
+                      &#8902; &middot; &#10023; &middot; &middot; &#10022; &middot; &#8902;
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+      </html>
     `,
     text: [
       'PRIVATE ACQUISITION',
