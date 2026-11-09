@@ -3,21 +3,14 @@
 import { useState } from 'react'
 
 type Props = {
-  firstName: string
-  contactEmail: string
-  /** ISO date when a request already exists; shows the confirmed state. */
-  existingCreatedAt: string | null
+  /** confirmationEmail is set only when the confirmation email was sent. */
+  onSubmitted: (result: { confirmationEmail: string | null }) => void
 }
 
 const ctaClassName =
   'btnGradient inline-flex items-center justify-center gap-x-7 px-6 py-3 text-lg duration-300 hover:gap-x-9 max-[639px]:gap-x-5 max-[639px]:px-5 max-[639px]:text-base disabled:cursor-wait disabled:opacity-70'
 
-const AcquisitionConversation = ({
-  firstName,
-  contactEmail,
-  existingCreatedAt,
-}: Props) => {
-  const [done, setDone] = useState(Boolean(existingCreatedAt))
+const AcquisitionConversation = ({ onSubmitted }: Props) => {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -32,40 +25,20 @@ const AcquisitionConversation = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message }),
       })
-      const data = (await res.json().catch(() => ({}))) as { error?: string }
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string
+        confirmationEmail?: string | null
+      }
       if (!res.ok) {
-        setError(data.error || 'Unable to send your request right now.')
+        setError(data.error || 'Unable to send your enquiry right now.')
         setSubmitting(false)
         return
       }
-      setDone(true)
+      onSubmitted({ confirmationEmail: data.confirmationEmail ?? null })
     } catch {
-      setError('Unable to send your request right now. Please try again.')
+      setError('Unable to send your enquiry right now. Please try again.')
       setSubmitting(false)
     }
-  }
-
-  if (done) {
-    return (
-      <div className="access-reveal mb-10 max-w-xl max-[1023px]:mx-auto">
-        <p className="mb-3 text-lg font-bold tracking-wide text-brand">
-          YOUR REQUEST HAS BEEN RECEIVED
-        </p>
-        <p className="text-lg leading-8 font-medium">
-          Thank you{firstName ? `, ${firstName}` : ''}. The artist will be in
-          touch with you personally within 24 hours.
-        </p>
-        <p className="mt-3 text-base leading-7 font-medium text-[#5f5f5f]">
-          A confirmation is on its way to your inbox. Anything further:{' '}
-          <a
-            href={`mailto:${contactEmail}`}
-            className="text-brand underline-offset-4 hover:underline"
-          >
-            {contactEmail}
-          </a>
-        </p>
-      </div>
-    )
   }
 
   return (
@@ -85,14 +58,14 @@ const AcquisitionConversation = ({
         className="mb-6 w-full rounded-[10px] border border-[rgba(154,35,73,0.25)] bg-white/70 px-4 py-3 text-lg font-medium outline-none focus:border-brand"
       />
 
-      <div className="flex flex-col items-start gap-4 max-[1023px]:items-center">
+      <div className="flex flex-col items-start gap-6 max-[1023px]:items-center">
         <button
           type="button"
           onClick={submit}
           disabled={submitting}
           className={ctaClassName}
         >
-          {submitting ? 'SENDING…' : 'REQUEST PRIVATE ACQUISITION'}
+          {submitting ? 'SENDING…' : 'BEGIN THE CONVERSATION'}
           {!submitting && (
             <img
               src="/images/icons/arrow-right.png"
@@ -101,15 +74,16 @@ const AcquisitionConversation = ({
             />
           )}
         </button>
+
+        <p className="max-w-xl border-l-2 border-brand/40 pl-5 text-base leading-7 font-medium text-[#5f5f5f] max-[1023px]:border-t max-[1023px]:border-l-0 max-[1023px]:border-brand/30 max-[1023px]:pt-5 max-[1023px]:pl-0 max-[1023px]:text-center max-[639px]:text-[15px] max-[639px]:leading-6">
+          Your enquiry begins a private conversation with the artist. No payment
+          is taken through the website. Your enquiry does not confirm a
+          purchase, reserve the artwork or transfer ownership.
+        </p>
+
         {error && (
           <p className="text-base font-medium text-brand/80">{error}</p>
         )}
-        <a
-          href={`mailto:${contactEmail}`}
-          className="text-lg font-medium tracking-wide text-brand underline-offset-4 duration-300 hover:underline max-[639px]:text-base"
-        >
-          {contactEmail}
-        </a>
       </div>
     </div>
   )

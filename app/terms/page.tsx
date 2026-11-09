@@ -21,7 +21,7 @@ export default function TermsPage() {
       intro="These terms explain what this website is, what applying for access does and does not mean, and how the artwork may eventually be acquired. Please read them before you apply."
       summary={[
         'This website presents one artwork. It is not a shop, and nothing here is a binding offer or a sale.',
-        'Applying for access or submitting a private acquisition request does not create a binding purchase agreement, reserve the artwork or transfer ownership.',
+        'Applying for access or sending a private acquisition enquiry does not create a binding purchase agreement, reserve the artwork or transfer ownership.',
         'No payment is taken through this website. Any acquisition happens only through a separate written agreement, arranged privately with the artist.',
         'Access is personal, selective and granted at our discretion.',
       ]}
@@ -56,7 +56,7 @@ export default function TermsPage() {
         <p>
           Nothing on this website is an offer capable of acceptance. The price shown is the price at
           which the artist is willing to begin a private conversation, not a binding price. Applying
-          for access, moving through the stages, or submitting a private acquisition request:
+          for access, moving through the stages, or sending a private acquisition enquiry:
         </p>
         <LegalList>
           <LegalItem>does not confirm a purchase;</LegalItem>
@@ -88,13 +88,13 @@ export default function TermsPage() {
 
       <LegalSection number="05" title="Private acquisition">
         <p>
-          The final stage lets you submit a &ldquo;Request Private Acquisition&rdquo;, expressing
+          The final stage lets you send a private enquiry (&ldquo;Begin the Conversation&rdquo;), expressing
           your interest in acquiring the artwork for &euro;1,000,000. Submitting it is an expression
           of interest only: it does not create a binding purchase agreement. No payment is taken
           through this website, and no bank details are shown on it.
         </p>
         <p>
-          After your request, everything is handled privately between you and the artist, including
+          After your enquiry, everything is handled privately between you and the artist, including
           the purchase agreement, secure payment, documentation and delivery of the artwork. An
           acquisition exists only once a written agreement has been signed by you and by us, and only
           on the terms of that agreement.

@@ -10,16 +10,25 @@ export type AcquisitionEnquiry = {
   id: string
   status: AcquisitionStatus
   createdAt: Date
+  confirmationSentAt: Date | null
 }
 
 type EnquiryRow = {
   id: string
   status: AcquisitionStatus
   created_at: Date
+  confirmation_sent_at: Date | null
 }
 
+const COLUMNS = 'id, status, created_at, confirmation_sent_at'
+
 function mapRow(row: EnquiryRow): AcquisitionEnquiry {
-  return { id: row.id, status: row.status, createdAt: row.created_at }
+  return {
+    id: row.id,
+    status: row.status,
+    createdAt: row.created_at,
+    confirmationSentAt: row.confirmation_sent_at,
+  }
 }
 
 export async function getAcquisitionEnquiry(
@@ -27,7 +36,7 @@ export async function getAcquisitionEnquiry(
 ): Promise<AcquisitionEnquiry | null> {
   return withClient(async (client) => {
     const result = await client.query<EnquiryRow>(
-      `SELECT id, status, created_at
+      `SELECT ${COLUMNS}
        FROM acquisition_enquiries
        WHERE application_id = $1
        LIMIT 1`,
@@ -49,7 +58,7 @@ export async function createAcquisitionEnquiry(input: {
          application_id, message, client_ip, user_agent
        ) VALUES ($1, $2, $3::inet, $4)
        ON CONFLICT (application_id) DO NOTHING
-       RETURNING id, status, created_at`,
+       RETURNING ${COLUMNS}`,
       [input.applicationId, input.message, input.clientIp, input.userAgent]
     )
 
@@ -58,7 +67,7 @@ export async function createAcquisitionEnquiry(input: {
     }
 
     const existing = await client.query<EnquiryRow>(
-      `SELECT id, status, created_at FROM acquisition_enquiries
+      `SELECT ${COLUMNS} FROM acquisition_enquiries
        WHERE application_id = $1 LIMIT 1`,
       [input.applicationId]
     )
@@ -66,7 +75,18 @@ export async function createAcquisitionEnquiry(input: {
   })
 }
 
-/** Details the artist's alert email needs. */
+export async function markConfirmationSent(id: string): Promise<void> {
+  await withClient((client) =>
+    client.query(
+      `UPDATE acquisition_enquiries
+       SET confirmation_sent_at = now()
+       WHERE id = $1 AND confirmation_sent_at IS NULL`,
+      [id]
+    )
+  )
+}
+
+/** Details the artist's alert email and the confirmation need. */
 export async function getApplicantForEmail(applicationId: string) {
   return withClient(async (client) => {
     const result = await client.query<{

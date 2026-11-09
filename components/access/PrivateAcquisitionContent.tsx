@@ -3,22 +3,26 @@
 import Header from '@/components/Header'
 import ConfidentialFooter from '@/components/access/ConfidentialFooter'
 import AcquisitionConversation from '@/components/access/AcquisitionConversation'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
-const CONTACT_EMAIL = 'private@stavarkling.com'
-
 type PrivateAcquisitionContentProps = {
   firstName: string
-  existingCreatedAt: string | null
+  /** True when the member has already sent their enquiry. */
+  alreadySubmitted: boolean
+  /** Set only when the confirmation email was actually sent. */
+  confirmationEmail: string | null
 }
 
 const PrivateAcquisitionContent = ({
   firstName,
-  existingCreatedAt,
+  alreadySubmitted,
+  confirmationEmail,
 }: PrivateAcquisitionContentProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [submitted, setSubmitted] = useState(alreadySubmitted)
+  const [sentTo, setSentTo] = useState(confirmationEmail)
 
   useGSAP(() => {
     gsap.set('.access-reveal', {
@@ -94,24 +98,38 @@ const PrivateAcquisitionContent = ({
                     Your decision would shape its outcome.
                   </span>
                 </p>
-                <p>
-                  Express your interest in acquiring Stavarkle #1,{' '}
-                  <span className="text-brand">Universe. Decided.</span>{' '}
-                  for &euro;1,000,000.
-                </p>
+                {!submitted && (
+                  <p>
+                    Express your interest in acquiring Stavarkle #1,{' '}
+                    <span className="text-brand">Universe. Decided.</span>{' '}
+                    for &euro;1,000,000.
+                  </p>
+                )}
               </div>
 
-              <AcquisitionConversation
-                firstName={firstName}
-                contactEmail={CONTACT_EMAIL}
-                existingCreatedAt={existingCreatedAt}
-              />
-
-              <p className="access-reveal max-w-xl border-l-2 border-brand/40 pl-5 text-base leading-7 font-medium text-[#5f5f5f] max-[1023px]:mx-auto max-[1023px]:border-t max-[1023px]:border-l-0 max-[1023px]:border-brand/30 max-[1023px]:pt-5 max-[1023px]:pl-0 max-[639px]:text-[15px] max-[639px]:leading-6">
-                Your request begins a private conversation about acquiring this
-                artwork. It does not confirm a purchase, reserve the artwork or
-                transfer ownership.
-              </p>
+              {submitted ? (
+                <div className="mb-10 max-w-xl max-[1023px]:mx-auto">
+                  <p className="mb-3 text-lg font-bold tracking-wide text-brand">
+                    YOUR ENQUIRY HAS BEEN RECEIVED
+                  </p>
+                  <p className="text-lg leading-8 font-medium">
+                    {firstName ? `Thank you, ${firstName}.` : 'Thank you.'} The
+                    artist will reply to you personally by email.
+                  </p>
+                  {sentTo ? (
+                    <p className="mt-3 text-base leading-7 font-medium text-[#5f5f5f]">
+                      A confirmation has been sent to {sentTo}.
+                    </p>
+                  ) : null}
+                </div>
+              ) : (
+                <AcquisitionConversation
+                  onSubmitted={({ confirmationEmail: email }) => {
+                    setSentTo(email)
+                    setSubmitted(true)
+                  }}
+                />
+              )}
             </div>
 
             <div className="flex w-2/3 justify-center max-[1023px]:w-full">
