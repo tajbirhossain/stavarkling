@@ -13,7 +13,10 @@ export type EnterNextPanelResult =
 
 /**
  * Advance panel_stage by one when access_stage is ahead.
- * Called when the member clicks ENTER THE MOMENT / PROCEED TO THE DECISION.
+ * Called when the member clicks ENTER THE MOMENT / ENTER THE DECISION.
+ *
+ * Stage 1 -> 2 needs no approval: entering The Moment grants stage 2 itself.
+ * Stage 2 -> 3 only opens once access_stage has been granted (admin approval).
  */
 export async function enterNextPanel(
   applicationId: string,
@@ -46,6 +49,33 @@ export async function enterNextPanel(
         panelStage,
         accessStage,
         path: accessPathForStage(panelStage),
+      }
+    }
+
+    // The Beginning is open to everyone who has verified their email.
+    if (panelStage === 1 && accessStage === 1) {
+      const opened = await client.query<{
+        access_stage: number
+        panel_stage: number
+      }>(
+        `UPDATE access_applications
+         SET access_stage = 2,
+             panel_stage = 2
+         WHERE id = $1
+           AND panel_stage = 1
+           AND access_stage = 1
+         RETURNING access_stage, panel_stage`,
+        [applicationId]
+      )
+      const row2 = opened.rows[0]
+      if (!row2) {
+        return { ok: false as const, reason: 'not_ready' as const }
+      }
+      return {
+        ok: true as const,
+        panelStage: row2.panel_stage as AccessStage,
+        accessStage: row2.access_stage as AccessStage,
+        path: accessPathForStage(row2.panel_stage as AccessStage),
       }
     }
 

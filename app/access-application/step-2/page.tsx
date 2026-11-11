@@ -234,8 +234,6 @@ const AccessApplicationStep2 = () => {
                   <br className="block max-[639px]:hidden" />
                   Your request will be reviewed personally. */}
                   Take the next step towards making this artwork yours.
-                  <br />
-                  Each access request is reviewed personally.
                 </p>
 
                 <form

@@ -35,6 +35,10 @@ export type StageContent = {
     title: string
     beats: NextStepBeat[]
     cta: string
+    /** No approval needed: the advance button is always shown on this panel */
+    open?: boolean
+    /** Shown just above the request button */
+    requestNote?: string
     /** After the next stage is granted, while still on this panel */
     advanceCta?: string
     advanceHref?: string
@@ -114,7 +118,8 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
           ),
         },
       ],
-      cta: 'REQUEST THE NEXT STAGE',
+      cta: 'ENTER THE MOMENT',
+      open: true,
       advanceCta: 'ENTER THE MOMENT',
       advanceHref: '/access/stage-2',
     },
@@ -166,8 +171,9 @@ export const STAGE_CONTENT: Record<AccessStage, StageContent> = {
           ),
         },
       ],
-      cta: 'REQUEST THE FINAL STAGE',
-      advanceCta: 'PROCEED TO THE DECISION',
+      cta: 'REQUEST ACCESS TO THE DECISION',
+      requestNote: 'Access to The Decision is by personal invitation.',
+      advanceCta: 'ENTER THE DECISION',
       advanceHref: '/access/stage-3',
     },
   },

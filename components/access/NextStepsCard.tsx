@@ -18,7 +18,7 @@ type NextStepsCardProps = {
 
 const PENDING_TITLE = 'REQUEST RECEIVED'
 const PENDING_BODY =
-  'Your request for the next stage is awaiting personal review.'
+  'We’ll email you when your request has been reviewed.'
 
 const CtaArrow = () => (
   <img
@@ -115,7 +115,7 @@ const NextStepsCard = ({
   }, [pageStage, router])
 
   const canAdvance =
-    liveMemberStage > pageStage &&
+    (Boolean(content.open) || liveMemberStage > pageStage) &&
     Boolean(content.advanceCta) &&
     Boolean(content.advanceHref)
 
@@ -255,6 +255,12 @@ const NextStepsCard = ({
                   </p>
                 </div>
               ) : (
+                <>
+                {content.requestNote ? (
+                  <p className="text-lg font-medium italic leading-8 text-brand/90">
+                    {content.requestNote}
+                  </p>
+                ) : null}
                 <button
                   type="button"
                   onClick={handleRequest}
@@ -264,6 +270,7 @@ const NextStepsCard = ({
                   {isPending ? 'SUBMITTING…' : content.cta}
                   {!isPending && <CtaArrow />}
                 </button>
+                </>
               )}
 
               {error && (

@@ -133,8 +133,12 @@ export default function AccessAuthWall() {
 
       // Land on the panel they've entered, not merely the granted ceiling.
       const stage = data.panelStage ?? data.accessStage ?? 1
+      // Invitation email link: keep them on The Decision once access is granted.
+      const toDecision =
+        window.location.pathname === '/access/stage-3' &&
+        (data.accessStage ?? 1) >= 3
       const path =
-        stage === 3
+        toDecision || stage === 3
           ? '/access/stage-3'
           : stage === 2
             ? '/access/stage-2'

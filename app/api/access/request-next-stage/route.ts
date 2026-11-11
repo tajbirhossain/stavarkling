@@ -46,7 +46,7 @@ export async function GET() {
 }
 
 const PENDING_MESSAGE =
-  'Your request for the next stage is awaiting personal review.'
+  'We’ll email you when your request has been reviewed.'
 
 export async function POST(request: Request) {
   const session = await getAccessSession()
@@ -58,6 +58,14 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: 'There is no further stage to request.' },
       { status: 400 }
+    )
+  }
+
+  // Only access to The Decision is requested, and only from The Moment.
+  if (session.accessStage < 2 || session.panelStage < 2) {
+    return NextResponse.json(
+      { error: 'This step is not available yet.' },
+      { status: 403 }
     )
   }
 
