@@ -20,7 +20,7 @@ const OnboardingGate = ({ children }: { children: React.ReactNode }) => {
     }
 
     if (!complete && !isOnboarding && !isLegal) {
-      router.replace('/onboarding')
+      router.replace('/onboarding/welcome')
       return
     }
 

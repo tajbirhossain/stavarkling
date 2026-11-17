@@ -1,0 +1,393 @@
+/* Welcome screen: the coming-soon look, with the welcome content. */
+
+.page {
+  --brand: #9a2349;
+  --text-muted: #5a4a4f;
+  --line: rgba(154, 35, 73, 0.22);
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #f7f3f4;
+  font-family: var(--font-cormorant-garamond), Georgia, serif;
+}
+
+/* Background */
+.bgArtwork {
+  z-index: 1;
+  pointer-events: none;
+  background-image: url(/images/welcome-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 50%;
+  transform: scale(1.03) translateX(-50%);
+  width: 100%;
+  height: 100%;
+}
+
+.lightCurve {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Content: centred on the page, exactly like the coming-soon layout */
+.content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 720px;
+  padding: 64px 40px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.brandLotus {
+  width: 62px;
+  height: auto;
+  margin-bottom: 14px;
+}
+
+.brandName {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  color: var(--brand);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.brandTagline {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: var(--text-muted);
+}
+
+/* Headline */
+.headline {
+  font-size: clamp(40px, 4.6vw, 62px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  margin-bottom: 40px;
+}
+
+.headline span {
+  display: block;
+  background: linear-gradient(
+    180deg,
+    #4a1a2c 0%,
+    #6e1d3a 45%,
+    var(--brand) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: min(300px, 70%);
+  margin-bottom: 32px;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--line) 20%,
+    var(--line) 80%,
+    transparent 100%
+  );
+}
+
+.dividerLotus {
+  width: 16px;
+  height: auto;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* Mantra */
+.mantra {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 48px;
+  padding: 0;
+}
+
+.mantra li {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-indent: 0.36em;
+  color: var(--text-muted);
+}
+
+/* Button */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px 34px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  /* Same 300ms ease as the other onboarding buttons (duration-300 hover:gap) */
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  gap: 24px;
+}
+
+.ctaArrow {
+  width: 20px;
+  height: auto;
+  display: block;
+  filter: brightness(100);
+}
+
+/* Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(8px);
+  transition:
+    opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .content {
+    padding: 48px 32px 44px;
+  }
+
+  .brand {
+    margin-bottom: 44px;
+  }
+
+  .brandName {
+    font-size: 28px;
+  }
+
+  .headline {
+    font-size: clamp(38px, 7.2vw, 58px);
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .bgArtwork {
+    inset: 0 0 0 auto;
+    left: auto;
+    width: 52%;
+    background-size: cover;
+    background-position: right center;
+    transform: none;
+    opacity: 0.9;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.35) 18%,
+      #000 42%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.35) 18%,
+      #000 42%,
+      #000 100%
+    );
+  }
+
+  .stars {
+    opacity: 0.18;
+  }
+
+  .content {
+    padding: 40px 22px 48px;
+    min-height: 100dvh;
+    justify-content: center;
+  }
+
+  .brand {
+    margin-bottom: 34px;
+  }
+
+  .brandLotus {
+    width: 40px;
+    margin-bottom: 10px;
+  }
+
+  .brandName {
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
+    margin-bottom: 8px;
+  }
+
+  .brandTagline {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+  }
+
+  .headline {
+    font-size: clamp(28px, 8.2vw, 40px);
+    margin-bottom: 26px;
+  }
+
+  .divider {
+    width: min(220px, 72%);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .dividerLotus {
+    width: 14px;
+  }
+
+  .mantra {
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .mantra li {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+  }
+
+  .cta {
+    padding: 14px 24px;
+    font-size: 14px;
+    gap: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .ctaArrow {
+    width: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .content {
+    padding: 32px 16px 40px;
+  }
+
+  .brandName {
+    font-size: 19px;
+    letter-spacing: 0.16em;
+    text-indent: 0.16em;
+  }
+
+  .headline {
+    font-size: 27px;
+  }
+
+  .mantra li {
+    letter-spacing: 0.16em;
+    text-indent: 0.16em;
+  }
+
+  .bgArtwork {
+    width: 46%;
+    background-position: 88% center;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .page {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .content {
+    padding: 28px 24px 36px;
+    min-height: auto;
+  }
+
+  .brand {
+    margin-bottom: 20px;
+  }
+
+  .headline {
+    font-size: clamp(28px, 5vw, 40px);
+    margin-bottom: 18px;
+  }
+
+  .mantra {
+    margin-bottom: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .cta {
+    transition: none;
+  }
+}

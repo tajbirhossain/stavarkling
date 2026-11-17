@@ -16,7 +16,7 @@ export function proxy(request: NextRequest) {
 
   if (!completed && !isOnboarding) {
     const url = request.nextUrl.clone()
-    url.pathname = '/onboarding'
+    url.pathname = '/onboarding/welcome'
     return NextResponse.redirect(url)
   }
 
