@@ -177,10 +177,10 @@ const AccessApplicationStep3 = () => {
                 </p>
 
                 <Link
-                  href="/artwork"
+                  href="/access/guide"
                   className="btnGradient mb-8 inline-flex w-auto items-center justify-center gap-x-4 px-8 py-4 text-lg duration-300 hover:gap-x-6 max-[639px]:w-full max-[639px]:py-3.5 max-[639px]:text-base"
                 >
-                  RETURN TO THE ARTWORK
+                  GO TO ACCESS
                   <img
                     src="/images/icons/arrow-right.png"
                     alt=""
